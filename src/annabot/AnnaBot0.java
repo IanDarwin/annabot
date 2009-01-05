@@ -4,6 +4,9 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import javax.persistence.Column;
+import javax.persistence.Id;
+
 import demo.MyAnnotation;
 
 /*
@@ -12,9 +15,11 @@ import demo.MyAnnotation;
 public class AnnaBot1 {
 
 	@MyAnnotation
+	@Id
 	int i;
 
 	@MyAnnotation
+	@Column(name="wah wah")
 	public static void main(String[] args) throws Exception {
 		if (args.length == 0) {
 			System.out.println( "Usage: AnnaBot1 className [...]");
@@ -33,8 +38,9 @@ public class AnnaBot1 {
 			for (Annotation a : ann) {
 				System.out.println(field.getName() + "--" + a);
 				Package pkg = a.getClass().getPackage();
-				if ("javax.persistence".equals(pkg.getName())) {
+				if (pkg != null && pkg.getName().startsWith("javax.persistence")) {
 					fieldHasJpaAnno = true;
+					System.out.println("1");
 					break;
 				}
 			}
@@ -45,8 +51,9 @@ public class AnnaBot1 {
 			for (Annotation a : ann) {
 				System.out.println(method.getName() + "--" + a);
 				Package pkg = a.getClass().getPackage();
-				if ("javax.persistence".equals(pkg.getName())) {
+				if (pkg != null && pkg.getName().startsWith("javax.persistence")) {
 					methodHasJpaAnno = true;
+					System.out.println("2");
 					break;
 				}
 			}
