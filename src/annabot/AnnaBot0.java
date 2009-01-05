@@ -33,33 +33,27 @@ public class AnnaBot1 {
 		Method[] methods = c.getDeclaredMethods();
 		boolean fieldHasJpaAnno = false, methodHasJpaAnno = false;
 		for (Field field : fields) {
-			System.out.println(field);
 			Annotation[] ann = field.getDeclaredAnnotations();
 			for (Annotation a : ann) {
-				System.out.println(field.getName() + "--" + a);
-				Package pkg = a.getClass().getPackage();
+				Package pkg = a.annotationType().getPackage();
 				if (pkg != null && pkg.getName().startsWith("javax.persistence")) {
 					fieldHasJpaAnno = true;
-					System.out.println("1");
 					break;
 				}
 			}
 		}
 		for (Method method : methods) {
-			System.out.println(method);
 			Annotation[] ann = method.getDeclaredAnnotations();
 			for (Annotation a : ann) {
-				System.out.println(method.getName() + "--" + a);
-				Package pkg = a.getClass().getPackage();
+				Package pkg = a.annotationType().getPackage();
 				if (pkg != null && pkg.getName().startsWith("javax.persistence")) {
 					methodHasJpaAnno = true;
-					System.out.println("2");
 					break;
 				}
 			}
 		}
 		if (fieldHasJpaAnno && methodHasJpaAnno) {
-			System.err.printf("Class %s has JPA annotations both on field(s) and on method(s).", c);
+			System.err.printf("Class %s has JPA annotations both on field(s) and on method(s).", c.getName());
 		}
 	}
 }
