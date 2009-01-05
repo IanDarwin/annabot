@@ -1,9 +1,10 @@
 package annabot;
 
-import demo.MyAnnotation;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
-import java.lang.reflect.*;
-import java.lang.annotation.*;
+import demo.MyAnnotation;
 
 /*
  * Very simple toy version, just to show checking annotations code
@@ -20,17 +21,22 @@ public class AnnaBot1 {
 			return;
 		}
 		String clName = args[0];
-		Class c = Class.forName(clName);
+		Class<?> c = Class.forName(clName);
 		// Don't use getDeclaredXXX() here, we do care about
 		// inherited methods/fields that are annotated.
-		Field[] fields = c.getFields();
-		Method[] methods = c.getMethods();
+		Field[] fields = c.getDeclaredFields();
+		Method[] methods = c.getDeclaredMethods();
 		boolean fieldHasJpaAnno = false, methodHasJpaAnno = false;
 		for (Field field : fields) {
 			System.out.println(field);
 			Annotation[] ann = field.getDeclaredAnnotations();
 			for (Annotation a : ann) {
 				System.out.println(field.getName() + "--" + a);
+				Package pkg = a.getClass().getPackage();
+				if ("javax.persistence".equals(pkg.getName())) {
+					fieldHasJpaAnno = true;
+					break;
+				}
 			}
 		}
 		for (Method method : methods) {
@@ -38,7 +44,15 @@ public class AnnaBot1 {
 			Annotation[] ann = method.getDeclaredAnnotations();
 			for (Annotation a : ann) {
 				System.out.println(method.getName() + "--" + a);
+				Package pkg = a.getClass().getPackage();
+				if ("javax.persistence".equals(pkg.getName())) {
+					methodHasJpaAnno = true;
+					break;
+				}
 			}
+		}
+		if (fieldHasJpaAnno && methodHasJpaAnno) {
+			System.err.printf("Class %s has JPA annotations both on field(s) and on method(s).", c);
 		}
 	}
 }
