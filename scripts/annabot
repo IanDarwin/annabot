@@ -1,0 +1,21 @@
+#!/bin/ksh
+
+# ANNotation Assertion Based Object Testing for Java
+# Ian F. Darwin, http://www.darwinsys.com/annabot
+
+# In production this will be a Jar file...
+ANNABOT_HOME=/home/ian/workspace/annabot/build
+
+case $# in
+0)	DIR=.;;
+*)	DIR="$@"
+esac
+
+for d in ${DIR}
+do
+	echo === Starting $d ===
+	(
+	cd $d
+	java -classpath ${ANNABOT_HOME}:$PWD annabot.AnnaBot1 $(find . -name \*.class|sed 's/^\.\///')
+	)
+done
