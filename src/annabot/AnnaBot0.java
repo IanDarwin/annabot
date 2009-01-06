@@ -30,13 +30,18 @@ public class AnnaBot1 {
 		}
 	}
 
-	private static void process(String className) throws ClassNotFoundException {
+	public static void process(String className) throws ClassNotFoundException {
 		Class<?> c = Class.forName(className);
+		process(c);
+	}
+
+	public static void process(Class<?> c) {
 		// Don't use getDeclaredXXX() here, we do care about
 		// inherited methods/fields that are annotated.
 		Field[] fields = c.getDeclaredFields();
 		Method[] methods = c.getDeclaredMethods();
 		boolean fieldHasJpaAnno = false, methodHasJpaAnno = false;
+
 		for (Field field : fields) {
 			Annotation[] ann = field.getDeclaredAnnotations();
 			for (Annotation a : ann) {
@@ -47,6 +52,7 @@ public class AnnaBot1 {
 				}
 			}
 		}
+
 		for (Method method : methods) {
 			Annotation[] ann = method.getDeclaredAnnotations();
 			for (Annotation a : ann) {
@@ -57,6 +63,7 @@ public class AnnaBot1 {
 				}
 			}
 		}
+
 		if (fieldHasJpaAnno && methodHasJpaAnno) {
 			System.err.printf("Class %s has JPA annotations both on field(s) and on method(s).", c.getName());
 		}
