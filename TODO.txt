@@ -4,6 +4,11 @@ Ian Darwin, http://www.darwinsys.com/
 
 Many of these are expanded in the accompanying Paper.
 
+-----------------------------------------------
+
+UI: method to introspect a Package, listing it?
+BUT: See http://www.velocityreviews.com/forums/t294669-get-classes-from-package.html
+
 Handle inherited annotations - union(getFields, getDeclaredFields)
 
 Generalize - write language, parse it..
