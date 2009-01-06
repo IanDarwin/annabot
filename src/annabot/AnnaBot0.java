@@ -10,13 +10,17 @@ import javax.persistence.Id;
 import demo.MyAnnotation;
 
 /*
- * Very simple toy version, just to show checking annotations code
+ * Annotations Assertion Based Object Testing for Java
+ * Version 0.0 testbase - a few hard-coded claims.
+ * Process each class, looking for conflicting uses
+ * of JPA annotations: if you annoted both fields and
+ * getters, one set or another will be ignored.
  */
 public class AnnaBot1 {
 
 	@MyAnnotation
 	@Id
-	int i;
+	private int i;
 
 	@MyAnnotation
 	@Column(name="wah wah")
@@ -45,6 +49,7 @@ public class AnnaBot1 {
 	 * @param c
 	 */
 	public static void process(Class<?> c) {
+		System.out.println("Starting class " + c);
 		// Don't use getDeclaredXXX() here, we do care about
 		// inherited methods/fields that are annotated.
 		Field[] fields = c.getDeclaredFields();
