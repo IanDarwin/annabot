@@ -24,13 +24,18 @@ public class AnnaBot1 {
 
 	@MyAnnotation
 	@Column(name="wah wah")
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 		if (args.length == 0) {
 			System.out.println( "Usage: AnnaBot1 className [...]");
 			return;
 		}
 		for (String name : args) {
-			process(name);
+			try {
+				process(name);
+			} catch (ClassNotFoundException e) {
+				System.err.println("Could not load class " + name);
+				System.err.println("Cause: " + e);
+			}
 		}
 	}
 
@@ -40,7 +45,8 @@ public class AnnaBot1 {
 	 * @throws ClassNotFoundException
 	 */
 	public static void process(String className) throws ClassNotFoundException {
-		Class<?> c = Class.forName(className.replace('/', '.').replaceAll(".class$", ""));
+		final String realClassName = className.replace('/', '.').replaceAll(".class$", "");
+		Class<?> c = Class.forName(realClassName);
 		process(c);
 	}
 
