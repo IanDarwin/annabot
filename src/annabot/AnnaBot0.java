@@ -25,8 +25,13 @@ public class AnnaBot1 {
 			System.out.println( "Usage: AnnaBot1 className [...]");
 			return;
 		}
-		String clName = args[0];
-		Class<?> c = Class.forName(clName);
+		for (String name : args) {
+			process(name);
+		}
+	}
+
+	private static void process(String className) throws ClassNotFoundException {
+		Class<?> c = Class.forName(className);
 		// Don't use getDeclaredXXX() here, we do care about
 		// inherited methods/fields that are annotated.
 		Field[] fields = c.getDeclaredFields();
