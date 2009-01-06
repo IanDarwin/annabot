@@ -30,11 +30,20 @@ public class AnnaBot1 {
 		}
 	}
 
+	/** Process a class whose name is given, replacing / with . and
+	 * removing trailing ".class" if present.
+	 * @param className
+	 * @throws ClassNotFoundException
+	 */
 	public static void process(String className) throws ClassNotFoundException {
-		Class<?> c = Class.forName(className);
+		Class<?> c = Class.forName(className.replace('/', '.').replaceAll(".class$", ""));
 		process(c);
 	}
 
+	/**
+	 * Process one class, checking its annotations.
+	 * @param c
+	 */
 	public static void process(Class<?> c) {
 		// Don't use getDeclaredXXX() here, we do care about
 		// inherited methods/fields that are annotated.
