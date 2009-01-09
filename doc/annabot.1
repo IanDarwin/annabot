@@ -1,0 +1,70 @@
+.\"	$OpenBSD: mdoc.template,v 1.10 2007/05/31 22:10:19 jmc Exp $
+.Dd $Mdocdate$
+.Dt ANNABOT 1
+.Os
+.Sh NAME
+.Nm annabot
+.Nd Annotations Assertion Based Object Testing for Java
+.Sh SYNOPSIS
+.Nm
+.Op Fl a Ar claimfile
+.Op Fl b
+.Op Fl c Ar className
+.Op Fl d Ar dirName
+.Op Fl p Ar packageName
+.Sh DESCRIPTION
+The
+.Nm
+program verifies assertions about Java annotations compiled into .class files.
+The program being verified must be specified, either as a class
+or package name or by directory.
+The assertions are contained in "claim" files that may be specified
+in one or more -c files.
+If there is no -c argument, the claim files in the
+.Nm
+program's distribution directory are used.
+The
+.Op fl b
+flag may be used to exclude the built-in claim files.
+.Sh ENVIRONMENT
+The
+CLASSPATH
+variable will be used to find both the code being tested
+and its dependent classes (which must include the annotations,
+as these are part of the API classpath).
+.Sh FILES
+Claim files are in a format documented in the AnnaBot documentation.
+.Sh EXAMPLES
+.DS
+.Nm
+.Fl p
+jabadex
+.DE
+.Pp
+This would test all classes in the "jabadex" package
+using only built-in claim files.
+.DS
+.Nm
+.Fl c
+jabadex.ToDo
+.Fl c
+myAssertions
+.Fl b
+.DE
+.Pp
+This would test the class jabadex.ToDo
+using only the claims made in the
+myAssertions 
+file.
+.\" .Sh SEE ALSO
+.\" .Xr foobar 1
+.\" .Sh STANDARDS
+.\" .Sh HISTORY
+.Sh AUTHORS
+The initial author of AnnaBot is Ian F. Darwin,
+.Ar http://www.darwinsys.com/annabot/ .
+.\" .Sh CAVEATS
+.Sh BUGS
+"Though compilers work from dusk til dawn,
+.br
+A verifier's work is never done."
