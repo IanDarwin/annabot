@@ -20,6 +20,7 @@ public class AnnaBot1 {
 
 	@MyAnnotation
 	@Id
+	@SuppressWarnings("unused")
 	private int i;
 
 	@MyAnnotation
