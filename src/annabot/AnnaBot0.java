@@ -13,7 +13,7 @@ import demo.MyAnnotation;
  * Annotations Assertion Based Object Testing for Java
  * Version 0.0 testbase - a few hard-coded claims.
  * Process each class, looking for conflicting uses
- * of JPA annotations: if you annoted both fields and
+ * of JPA annotations: if you annotated both fields and
  * getters, one set or another will be ignored.
  */
 public class AnnaBot1 {
@@ -24,7 +24,7 @@ public class AnnaBot1 {
 	private int i;
 
 	@MyAnnotation
-	@Column(name="wah wah")
+	@Column(name="pac man")
 	public static void main(String[] args) {
 		if (args.length == 0) {
 			System.out.println( "Usage: AnnaBot1 className [...]");
