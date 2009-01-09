@@ -11,11 +11,13 @@ case $# in
 *)	DIR="$@"
 esac
 
+# TODO parse args
+
 for d in ${DIR}
 do
 	echo === Starting $d ===
 	(
 	cd $d
-	java -classpath ${ANNABOT_HOME}:$PWD annabot.AnnaBot1 $(find . -name \*.class|sed 's/^\.\///')
+	java -classpath ${ANNABOT_HOME}:${CLASSPATH}:$PWD annabot.AnnaBot1 $(find . -name \*.class|sed 's/^\.\///')
 	)
 done
