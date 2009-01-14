@@ -14,7 +14,8 @@ import demo.MyAnnotation;
  * Version 0.0 testbase - a few hard-coded claims.
  * Process each class, looking for conflicting uses
  * of JPA annotations: if you annotated both fields and
- * getters, one set or another will be ignored.
+ * getters, one set or another will be ignored by JPA,
+ * so we flag it here.
  */
 public class AnnaBot1 {
 
