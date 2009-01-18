@@ -13,9 +13,9 @@ import demo.MyAnnotation;
  * Annotations Assertion Based Object Testing for Java
  * Version 0.0 testbase - a few hard-coded claims.
  * Process each class, looking for conflicting uses
- * of JPA annotations: if you annotated both fields and
- * getters, one set or another will be ignored by JPA,
- * so we flag it here.
+ * of JPA annotations: because, if you annotated both fields 
+ * and getters, one set or another will be ignored by a
+ * fully-conforming JPA implementation, so we flag it here.
  */
 public class AnnaBot1 {
 
