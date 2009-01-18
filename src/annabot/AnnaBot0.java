@@ -17,7 +17,7 @@ import demo.MyAnnotation;
  * and getters, one set or another will be ignored by a
  * fully-conforming JPA implementation, so we flag it here.
  */
-public class AnnaBot1 {
+public class AnnaBot0 {
 
 	@MyAnnotation
 	@Id
