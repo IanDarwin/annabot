@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!-- 
+ ====================================================================== 
+     
+ Jan 18, 2009 12:01:37 PM                                                        
+
+ AnnaBot - Annotation Assertions-Based Object Testing    
+                                                                    
+ ====================================================================== 
+ -->
+<project 
+	name="AnnaBotAnnotation Assertions-Based Object Testing"
+	default="run">
+    <description>
+     Annotation Assertions-Based Object Testing
+    </description>
+
+	<property name="antlr_jar" value="lib/antlr-3.1.1.jar"/>
+	<property name="src" value="src"/>
+	<property name="lib" value="lib"/>
+	<property name="build" value="build"/>
+
+	<path id="antlr.classpath">
+	      <fileset dir="${lib}">
+	           <include name="*.jar"/>
+	      </fileset>
+	      <dirset dir=".">
+	          <include name="${build}"/>
+	      </dirset>
+	</path>
+
+
+    <!-- ================================= 
+          target: run          
+         ================================= -->
+    <target name="run" depends="compile" description="--> description">
+        <java className="annabot.antlr.AnnaBot">
+        	<classpath refid="antlr.classpath"/>
+			<arg>6 * 7</arg>
+		</java>
+    </target>
+
+    <!-- - - - - - - - - - - - - - - - - - 
+          target: depends                      
+         - - - - - - - - - - - - - - - - - -->
+    <target name="compile" depends="antlr">
+    	<javac>
+			<classpath ref="antlr.classpath"/>
+		</javac>
+    </target>
+
+	<target name="antlr">
+		<antlr 
+			target="${src}/annabot/antlr/Grammar.g"
+			outputdirectory="${build}"
+			>
+			<classpath refid="antlr.classpath"/>
+		</antlr>
+	</target>
+	<target name="antlr-by-java">
+		<java className="org.antlr.Tool">
+			<classpath refid="antlr.classpath"/>
+			<arg value="${src}/annabot/antlr/Grammar.g"/>
+			<arg value="${src}/annabot/antlr/Walker.g"/>
+		</java>
+	</target>
+<!--
+
+
+clean:
+        @rm -f Grammar.tokens GrammarLexer.java GrammarParser.java Walker.java Walker.tokens
+
+-->
+</project>
