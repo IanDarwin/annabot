@@ -9,7 +9,7 @@ if (class.annotated(Entity)) {
 	}
 }
 if (class.annotated(Embeddable)) { 
-	require ! (method.annotated(Id) || field.annotated(Id)){} // default message
+	require ! (method.annotated(Id) || field.annotated(Id)){}; # default message
 }
 }
 

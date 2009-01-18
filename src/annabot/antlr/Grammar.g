@@ -12,17 +12,20 @@ package annabot.antlr;
 package annabot.antlr;
 }
 
-program:   Import * ( CLAIM NAME '{' stmt+ '}' {
+program:   import_stmt * ( CLAIM SIMPLENAME '{' stmt+ '}' {
 	System.out.println("G"+$stmt.tree.toStringTree());} 
 	)+ ;
 
-Import:	IMPORT IMPORTNAME ';';
+import_stmt:	IMPORT FULLPACKAGENAME ';';
 
-stmt:	ifClause verb '{' core error? '}' ';' ;
+stmt:	ifClause verb '{' core ( ';' | error ) '}' ';' ;
 
-core:	check |
-		( check OR check ) |
-		( check AND check );
+core:	check
+		| NOT check
+		| ( check OR check )
+		| ( check AND check )
+		| ( check ',' check)
+		;
 
 ifClause: IF '(' check ')';
 
@@ -30,13 +33,13 @@ verb:	REQUIRE | ATMOSTONE;
 
 check:	classAnnotated | methodAnnotated | fieldAnnotated;
 
-classAnnotated:		CLASS_ANNOTATED '(' NAME ')';
-methodAnnotated:	METHOD_ANNOTATED '(' NAME ')';
-fieldAnnotated:		FIELD_ANNOTATED '(' NAME ')';
+classAnnotated:		CLASS_ANNOTATED '(' FULLPACKAGENAME ')';
+methodAnnotated:	METHOD_ANNOTATED '(' FULLPACKAGENAME ')';
+fieldAnnotated:		FIELD_ANNOTATED '(' FULLPACKAGENAME ')';
 
 error:	'{' ERROR QSTRING '}' ;
 
-// TOKENS
+// Lexical Tokens
 
 IMPORT:				'import';
 CLAIM:				'claim';
@@ -46,13 +49,13 @@ CLASS_ANNOTATED:	'class.annotated';
 METHOD_ANNOTATED:	'method.annotated';
 FIELD_ANNOTATED:	'field.annotated';
 IF:					'if';
-AND:				'and';
-OR:					'or';
+AND:				'&&';
+OR:					'||';
+NOT:				'!';
 ERROR:				'error';
-NAME:   ('a'..'z'|'A'..'Z')+;
-IMPORTNAME:	'a'..'z' ('a'..'z'|'.')+ ;
-QSTRING:	'"' ( options {greedy=false;} : . )* '"' ;
-NEWLINE:'\r'? '\n' ;
-WS  :   (' '|'\t')+ {skip();} ;
+SIMPLENAME:   		('a'..'z'|'A'..'Z')+;
+FULLPACKAGENAME:	'a'..'z' ('a'..'z'|'.'|'*')+ ;
+QSTRING:			'"' ( options {greedy=false;} : . )* '"' ;
+WS  :   (' '|'\t'|'\n'|'\r')+ {skip();} ;
 COMMENT: '#' ( options {greedy=false;} : . )* NEWLINE+ {skip();};
 

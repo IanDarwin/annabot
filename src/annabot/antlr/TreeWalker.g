@@ -13,19 +13,22 @@ import java.util.HashMap;
 }
 
 @members {
-/** Map variable name to Integer value */
+/** Map variable SIMPLENAME to Integer value */
 Map<String,Integer> variables = new HashMap<String,Integer>();
 }
 
-program:   import_stmt * ( CLAIM NAME '{' stmt+ '}' {System.out.println("W:STMT");} )+ ;
+program:   import_stmt * ( CLAIM SIMPLENAME '{' stmt+ '}' {System.out.println("W:STMT");} )+ ;
 
 import_stmt: IMPORT IMPORTNAME ';';
 
 stmt:	ifClause verb '{' core error? '}' ';' ;
 
-core:	check |
-		( check OR check ) |
-		( check AND check );
+core:	check
+		| NOT check
+		| ( check OR check )
+		| ( check AND check )
+		| ( check ',' check)
+		;
 
 ifClause: IF '(' check ')';
 
@@ -33,8 +36,8 @@ verb:	REQUIRE | ATMOSTONE;
 
 check:	classAnnotated | methodAnnotated | fieldAnnotated;
 
-classAnnotated:		CLASS_ANNOTATED '(' NAME ')';
-methodAnnotated:	METHOD_ANNOTATED '(' NAME ')';
-fieldAnnotated:		FIELD_ANNOTATED '(' NAME ')';
+classAnnotated:		CLASS_ANNOTATED '(' SIMPLENAME ')';
+methodAnnotated:	METHOD_ANNOTATED '(' SIMPLENAME ')';
+fieldAnnotated:		FIELD_ANNOTATED '(' SIMPLENAME ')';
 
 error:	'{' ERROR QSTRING '}' ;
