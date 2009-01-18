@@ -1,0 +1,16 @@
+import javax.persistence.*;
+
+claim JPA {
+if (class.annotated(Entity)) {
+    require method.annotated(Id) || field.annotated(Id);
+    atMostOne method.annotated(javax.persistence.*), field.annotated(javax.persistence.*)
+	{
+        error "The JPA Spec only allows JPA annotations on methods OR fields";
+	}
+}
+if (class.annotated(Embeddable)) { 
+	require ! (method.annotated(Id) || field.annotated(Id)){} // default message
+}
+}
+
+

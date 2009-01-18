@@ -1,0 +1,27 @@
+program:=	CLAIM name '{' stmt+ '}'
+
+stmt:=	ifClause verb '{' core error? '}' ';'
+
+core:=	claim |
+		( claim OR claim ) |
+		( claim AND claim )
+
+ifClause:= IF '(' classClaim ')'
+
+VERB:=	REQUIRE | ATMOSTONE
+
+claim:=	classAnnotated | methodAnnotated | fieldAnnotated
+
+classAnnotated:=	CLASS.ANNOTATED '(' name ')'
+methodAnnotated:=	METHOD.ANNOTATED '(' name ')'
+fieldAnnotated:=	FIELD.ANNOTATED '(' name ')'
+
+CLAIM:=		"claim"
+
+REQUIRE:=	"require"
+ATMOSTONE:=	"atMostOne"
+CLASS_ANNOTATED:= "class.annotated"
+METHOD_ANNOTATED:= "method.annotated"
+FIELD_ANNOTATED:= "field.annotated"
+
+name:=	/A-Z[A-Za-z]+/
