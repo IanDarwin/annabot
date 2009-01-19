@@ -18,7 +18,9 @@ program:	import_stmt*
 			'}' {
 				System.out.println(
 				"Grammar: "+$stmt.tree.toStringTree()); 
-			};
+			}
+			EOF
+			;
 
 import_stmt:	IMPORT FULLPACKAGENAME ';';
 
@@ -62,7 +64,7 @@ ERROR:				'error';
 FULLPACKAGENAME:	'a'..'z' ('a'..'z'|'A'.'Z'|'.'|'*')+ ;
 CLASSNAME:   		'A'..'Z' ('a'..'z'|'A'..'Z')+;
 QSTRING:			'"' ( options {greedy=false;} : . )* '"' ;
-NEWLINE:	'\r'? '\n';	// allow for dog files.
+fragment NEWLINE:	'\r'? '\n';	// allow for dog files.
 WHITESPACE:	(' '|'\t'|NEWLINE)+ {skip();} ;
 COMMENT:	'#' ( options {greedy=false;} : . )* NEWLINE+ {
 				skip();
