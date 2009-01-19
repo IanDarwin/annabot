@@ -1,0 +1,1 @@
+claim tag { require { class.annotated(a.Foo); }; }

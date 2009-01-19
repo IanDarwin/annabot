@@ -13,15 +13,18 @@ import java.util.HashMap;
 }
 
 @members {
-/** Map variable SIMPLENAME to Integer value */
+/** Map variable CLASSNAME to Integer value */
 Map<String,Integer> variables = new HashMap<String,Integer>();
 }
 
-program:   import_stmt * ( CLAIM SIMPLENAME '{' stmt+ '}' {System.out.println("W:STMT");} )+ ;
+program:	
+			stmt+ {
+				System.out.println("TreeWalker:STMT"); 
+			};
 
-import_stmt: IMPORT IMPORTNAME ';';
+import_stmt:	IMPORT FULLPACKAGENAME ';';
 
-stmt:	ifClause verb '{' core error? '}' ';' ;
+stmt:	ifClause* verb '{' core ( ';' | error ) '}' ';' ;
 
 core:	check
 		| NOT check
@@ -36,8 +39,8 @@ verb:	REQUIRE | ATMOSTONE;
 
 check:	classAnnotated | methodAnnotated | fieldAnnotated;
 
-classAnnotated:		CLASS_ANNOTATED '(' SIMPLENAME ')';
-methodAnnotated:	METHOD_ANNOTATED '(' SIMPLENAME ')';
-fieldAnnotated:		FIELD_ANNOTATED '(' SIMPLENAME ')';
+classAnnotated:		CLASS_ANNOTATED '(' FULLPACKAGENAME ')';
+methodAnnotated:	METHOD_ANNOTATED '(' FULLPACKAGENAME ')';
+fieldAnnotated:		FIELD_ANNOTATED '(' FULLPACKAGENAME ')';
 
 error:	'{' ERROR QSTRING '}' ;

@@ -12,13 +12,21 @@ package annabot.antlr;
 package annabot.antlr;
 }
 
-program:   import_stmt * ( CLAIM SIMPLENAME '{' stmt+ '}' {
-	System.out.println("G"+$stmt.tree.toStringTree());} 
-	)+ ;
+program:	import_stmt* 
+			CLAIM CLASSNAME '{'
+				stmt+ 
+			'}' {
+				System.out.println(
+				"Grammar: "+$stmt.tree.toStringTree()); 
+			};
 
 import_stmt:	IMPORT FULLPACKAGENAME ';';
 
-stmt:	ifClause verb '{' core ( ';' | error ) '}' ';' ;
+stmt:	ifClause* '{' verb
+			'{' core ( ';' | error ) '}' 
+		'}' ';' ;
+
+verb:	REQUIRE | ATMOSTONE;
 
 core:	check
 		| NOT check
@@ -28,8 +36,6 @@ core:	check
 		;
 
 ifClause: IF '(' check ')';
-
-verb:	REQUIRE | ATMOSTONE;
 
 check:	classAnnotated | methodAnnotated | fieldAnnotated;
 
@@ -53,9 +59,12 @@ AND:				'&&';
 OR:					'||';
 NOT:				'!';
 ERROR:				'error';
-SIMPLENAME:   		('a'..'z'|'A'..'Z')+;
-FULLPACKAGENAME:	'a'..'z' ('a'..'z'|'.'|'*')+ ;
+FULLPACKAGENAME:	'a'..'z' ('a'..'z'|'A'.'Z'|'.'|'*')+ ;
+CLASSNAME:   		'A'..'Z' ('a'..'z'|'A'..'Z')+;
 QSTRING:			'"' ( options {greedy=false;} : . )* '"' ;
-WS  :   (' '|'\t'|'\n'|'\r')+ {skip();} ;
-COMMENT: '#' ( options {greedy=false;} : . )* NEWLINE+ {skip();};
+NEWLINE:	'\r'? '\n';	// allow for dog files.
+WHITESPACE:	(' '|'\t'|NEWLINE)+ {skip();} ;
+COMMENT:	'#' ( options {greedy=false;} : . )* NEWLINE+ {
+				skip();
+			};
 
