@@ -1,5 +1,7 @@
 package annabot;
 
+import java.util.Iterator;
+
 import tree.Conjunction;
 import tree.MethodAnnotated;
 import tree.Operator;
@@ -12,6 +14,9 @@ public class Processor {
 		this.checks = checks;
 	}
 	public boolean process(Class<?> target, Operator[] checks) {
+		for (Operator check: checks) {
+			System.out.println(check);
+		}
 		return true;
 	}
 	public boolean process(Class<?> target) {
