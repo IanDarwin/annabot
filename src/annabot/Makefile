@@ -3,7 +3,7 @@ SRCS=		AnnaBot.java antlr/*.java
 BUILD=		../../build
 
 try:	build
-	java -classpath $(BUILD):$(ANTLR_JAR) annabot.AnnaBot < ../Sample.claim
+	java -classpath $(BUILD):$(ANTLR_JAR) annabot.AnnaBot ../../Minimal.claim
 
 build:	antlr
 	javac -d ${BUILD} -classpath $(BUILD):$(ANTLR_JAR) $(SRCS)
