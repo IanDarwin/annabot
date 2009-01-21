@@ -14,19 +14,22 @@ package annabot.antlr;
 
 program:	import_stmt* 
 			CLAIM CLASSNAME '{'
-				stmt+ 
+				stmt+
 			'}' {
 				System.out.println(
 				"Grammar: "+$stmt.tree.toStringTree()); 
 			}
-			EOF
+			EOF 				-> stmt
 			;
 
-import_stmt:	IMPORT FULLPACKAGENAME ';';
+import_stmt:	IMPORT FULLPACKAGENAME ';' {
+			System.out.println("IMPORT " + $FULLPACKAGENAME.text);
+			};
 
 stmt:	ifClause* '{' verb
-			'{' core ( ';' | error ) '}' 
-		'}' ';' ;
+			'{' core ( ';' | error ) '}'
+		'}' ';'
+		;
 
 verb:	REQUIRE | ATMOSTONE;
 
