@@ -1,6 +1,6 @@
 package annabot;
 
-public class AnnaBot2 {
+public class AnnaBot {
 
 	/**
 	 * Annotations Assertion Based Object Testing for Java

@@ -14,7 +14,7 @@ import annabot.antlr.GrammarLexer;
 import annabot.antlr.GrammarParser;
 import annabot.antlr.TreeWalker;
 
-public class AnnaBot {
+public class AnnaBot1 {
 	
     private static boolean debug = true;
 
