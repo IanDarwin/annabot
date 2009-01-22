@@ -4,9 +4,9 @@ package tree;
 /** Placeholder when the target that must be 
  * annotated is a Class.
  */
-public class ClassAnnotated implements Operator {
+public class AtMostOne implements Operator {
 	
-	public ClassAnnotated(String name) {
+	public AtMostOne(Operator ...operators) {
 		
 	}
 	

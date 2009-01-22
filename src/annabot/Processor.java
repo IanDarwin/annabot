@@ -1,8 +1,5 @@
 package annabot;
 
-import java.util.Iterator;
-
-import tree.Conjunction;
 import tree.MethodAnnotated;
 import tree.Operator;
 import tree.RequiresOne;
@@ -24,9 +21,8 @@ public class Processor {
 	}
 	public static void main(String[] args) {
 		Operator[] checks = {
-				Conjunction.AND,
-				new RequiresOne(),
-				new MethodAnnotated()
+						new RequiresOne(
+						new MethodAnnotated("MyAnnotation"))
 		};
 		Processor p = new Processor(checks);
 		p.process(Object.class);

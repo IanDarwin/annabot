@@ -8,8 +8,10 @@ public class AnnaBot {
 	 * parse list and a package name. The DSL is effectively
 	 * a set of Constructor calls.
 	 */
-	public static void main(String[] args) {
-		
+	public static void main(String[] args) throws Exception {
+		String classesToTest = args[0];
+		classesToTest = "demo.MyAnnotatedClass";
+		String claimClass = "demo.MyClaim";
 	}
 
 }

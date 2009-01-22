@@ -1,12 +1,11 @@
 package tree;
 
-
 /** Placeholder when the target that must be 
- * annotated is a Class.
+ * annotated is a Method.
  */
-public class ClassAnnotated implements Operator {
+public class FieldAnnotated implements Operator {
 	
-	public ClassAnnotated(String name) {
+	public FieldAnnotated(String name) {
 		
 	}
 	
