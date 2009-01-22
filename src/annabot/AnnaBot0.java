@@ -22,7 +22,7 @@ public class AnnaBot0 {
 	@MyAnnotation
 	@Id
 	@SuppressWarnings("unused")
-	private int i;
+	private static int i;
 
 	@MyAnnotation
 	@Column(name="pac man")
@@ -38,6 +38,9 @@ public class AnnaBot0 {
 				System.err.println("Could not load class " + name);
 				System.err.println("Cause: " + e);
 			}
+		}
+		if (i == 42) {
+			System.out.println(i);
 		}
 	}
 
