@@ -5,18 +5,20 @@ package tree;
  * annotated is a Class.
  */
 public class AtMostOne implements Operator {
-	
-	public AtMostOne(Operator ...operators) {
+
+	Operator[] operators;
 		
+	public AtMostOne(Operator ... operators) {
+		this.operators = operators;
 	}
 	
-	/** The required annotation; sadly we cannot
-	 * use java.lang.annotation.Annotation as its type.
-	 */
-	Class<?> annotation;
-
 	public boolean process(Class<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		int numTrue = 0;
+		for (Operator o : operators) {
+			if (o.process(c)) {
+				numTrue++;
+			}
+		}
+		return numTrue <= 1;
 	}
 }
