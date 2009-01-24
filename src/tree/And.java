@@ -1,14 +1,20 @@
 package tree;
 
+/** Return false unless all ops are true */
 public class And implements Operator {
-	public And(Operator ... ops) {
-		for (Operator o : ops) {
-			System.out.println(o);
-		}
+
+	Operator[] operators;
+	
+	public And(Operator ... operators) {
+		this.operators = operators;
 	}
 
 	public boolean process(Class<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		for (Operator o : operators) {
+			if (!o.process(c)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
