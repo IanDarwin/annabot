@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /** Placeholder when the target that must be 
  * annotated is a Class.
  */
-public class ClassAnnotated  extends Annotated implements Operator {
+public class ClassAnnotated extends Annotated implements Operator {
 	
 	public ClassAnnotated(String name) {
 		this.annotationName = name;
@@ -24,15 +24,13 @@ public class ClassAnnotated  extends Annotated implements Operator {
 		if (annotationName != null) {
 			final Annotation[] classAnnotations = c.getDeclaredAnnotations();
 			for (Annotation annotation : classAnnotations) {
-				String string = annotation.toString();
-				String annName = string.substring(1).replaceFirst("\\(.*", "");
-				if (match(annName)) {
+				if (annotationNameMatches(annotationClassName(annotation))) {
 					return true;
 				}				
 			}
 			return false;
 		} else {
-			return null == c.getAnnotation(annotationClass);
+			return null != c.getAnnotation(annotationClass);
 		}
 	}
 }

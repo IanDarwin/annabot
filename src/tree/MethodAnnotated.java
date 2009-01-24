@@ -1,6 +1,7 @@
 package tree;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.AccessibleObject;
 import java.util.regex.Pattern;
 
 /** Placeholder when the target that must be 
@@ -20,9 +21,11 @@ public class MethodAnnotated extends Annotated implements Operator {
 		this.annotationClass = cl;
 	}
 
-
 	public boolean process(Class<?> c) {
-		// TODO Auto-generated method stub
+		for (AccessibleObject o : c.getMethods()) {
+			if (isAnnotated(o))
+				return true;
+		}
 		return false;
 	}
 }
