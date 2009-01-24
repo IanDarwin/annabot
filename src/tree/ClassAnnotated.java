@@ -25,7 +25,6 @@ public class ClassAnnotated implements Operator {
 	}
 
 	public boolean process(Class<?> c) {
-		final String clazzName = c.getName();
 		if (annotationName != null) {
 			final Annotation[] classAnnotations = c.getDeclaredAnnotations();
 			for (Annotation annotation : classAnnotations) {
