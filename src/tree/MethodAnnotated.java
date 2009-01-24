@@ -1,18 +1,25 @@
 package tree;
 
+import java.lang.annotation.Annotation;
+import java.util.regex.Pattern;
+
 /** Placeholder when the target that must be 
  * annotated is a Method.
  */
-public class MethodAnnotated implements Operator {
+public class MethodAnnotated extends Annotated implements Operator {
 	
 	public MethodAnnotated(String name) {
-		
+		this.annotationName = name;
+		this.regex = Pattern.compile(name.replaceAll("\\*", ".*"));
+		this.annotationClass = null;
 	}
-	
-	/** The required annotation; sadly we cannot
-	 * use java.lang.annotation.Annotation as its type.
-	 */
-	Class<?> annotation;
+
+	public MethodAnnotated(Class<? extends Annotation> cl) {
+		this.annotationName = null;
+		this.regex = null;
+		this.annotationClass = cl;
+	}
+
 
 	public boolean process(Class<?> c) {
 		// TODO Auto-generated method stub

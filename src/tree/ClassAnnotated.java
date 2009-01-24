@@ -6,12 +6,8 @@ import java.util.regex.Pattern;
 /** Placeholder when the target that must be 
  * annotated is a Class.
  */
-public class ClassAnnotated implements Operator {
+public class ClassAnnotated  extends Annotated implements Operator {
 	
-	private final String annotationName;
-	private final Pattern regex;
-	private final Class<? extends Annotation> annotationClass;
-
 	public ClassAnnotated(String name) {
 		this.annotationName = name;
 		this.regex = Pattern.compile(name.replaceAll("\\*", ".*"));
@@ -38,9 +34,5 @@ public class ClassAnnotated implements Operator {
 		} else {
 			return null == c.getAnnotation(annotationClass);
 		}
-	}
-
-	private boolean match(String annName) {
-		return regex.matcher(annName).matches();
 	}
 }
