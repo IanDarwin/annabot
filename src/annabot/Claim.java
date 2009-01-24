@@ -6,7 +6,7 @@ import tree.Operator;
  * of Operators, making up the Assertion
  * about one API.
  */
-public interface Claim {
-	public Operator[] getClassFilter();
-	public Operator[] getOperators();
+public abstract class Claim {
+	public abstract Operator[] getClassFilter();
+	public abstract Operator[] getOperators();
 }
