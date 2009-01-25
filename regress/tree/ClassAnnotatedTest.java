@@ -28,12 +28,12 @@ public class ClassAnnotatedTest {
 	}
 
 	@Test public void testTrueWithAnnotationClass() {
-		Operator t = new ClassAnnotated(java.lang.SuppressWarnings.class);
+		Operator t = new ClassAnnotated(MyAnnotation.class);
 		assertTrue(t.process(ClassAnnotatedTest.class));
 	}
 
 	@Test public void testFalseWithAnnotationClass() {
 		Operator t = new ClassAnnotated(java.lang.SuppressWarnings.class);
-		assertTrue(t.process(Object.class));
+		assertFalse(t.process(Object.class));
 	}
 }
