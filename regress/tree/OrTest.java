@@ -1,6 +1,8 @@
 package tree;
 
 import static org.junit.Assert.assertEquals;
+import static tree.OperatorUtils.FALSE;
+import static tree.OperatorUtils.TRUE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +16,7 @@ import org.junit.runners.Parameterized.Parameters;
  * This is a JUnit test for the "Or" Operator class.
  */
 @RunWith(value=Parameterized.class)
-public class OrTest extends LogicBaseTest {
+public class OrTest {
 
 	/** This method provides data to the constructor for use in tests */
 	@Parameters

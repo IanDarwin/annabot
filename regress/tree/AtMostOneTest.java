@@ -1,6 +1,8 @@
 package tree;
 
 import static org.junit.Assert.assertEquals;
+import static tree.OperatorUtils.FALSE;
+import static tree.OperatorUtils.TRUE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,7 +16,7 @@ import org.junit.runners.Parameterized.Parameters;
  * This is a JUnit test for the "AtMostOne" Operator.
  */
 @RunWith(value=Parameterized.class)
-public class AtMostOneTest extends LogicBaseTest {
+public class AtMostOneTest {
 
 	/** This method provides data to the constructor for use in tests */
 	@Parameters

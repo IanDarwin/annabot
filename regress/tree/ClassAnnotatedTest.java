@@ -1,9 +1,11 @@
 package tree;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import org.junit.Test;
 
 import demo.MyAnnotation;
-import static org.junit.Assert.*;
 
 @MyAnnotation
 public class ClassAnnotatedTest {
