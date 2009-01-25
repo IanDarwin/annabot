@@ -46,6 +46,9 @@ public class AnnaBot {
 				
 		Processor p = new Processor(c.newInstance());
 		final boolean result = p.process(Class.forName(classesToTest));
-		System.out.println(result ? "OK" : "Fail");
+		System.out.printf(
+				"Class %s Result %s",
+				classesToTest,
+				result ? "OK" : "Fail");
 	}
 }

@@ -9,4 +9,5 @@ import tree.Operator;
 public abstract class Claim {
 	public abstract Operator[] getClassFilter();
 	public abstract Operator[] getOperators();
+	public abstract String getDescription();
 }

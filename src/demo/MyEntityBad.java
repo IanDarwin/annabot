@@ -5,9 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class MyEntityGood {
+public class MyEntityBad {
 	@Id int id;
-	@Column 
 	String name = "Fred";
+	@Column 
 	public String getName() { return name; }
 }

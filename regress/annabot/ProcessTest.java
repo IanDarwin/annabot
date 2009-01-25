@@ -17,6 +17,10 @@ import demo.MyAnnotation;
 public class ProcessTest {
 	Claim checks = new Claim() {
 		@Override
+		public String getDescription() {
+			return "Fake Claim w/ RequiresOne(MethodAnnotated(MyAnnotation))";
+		}
+		@Override
 		public Operator[] getClassFilter() {
 			return null;
 		}
@@ -30,6 +34,10 @@ public class ProcessTest {
 	};
 
 	Claim failingChecks = new Claim() {
+		@Override
+		public String getDescription() {
+			return "Fake Claim w/ RequiresOne(MethodAnnotated(MyAnnotation))";
+		}
 		@Override
 		public Operator[] getClassFilter() {
 			return null;
@@ -45,10 +53,13 @@ public class ProcessTest {
 	
 	Claim noneShallPassFilter = new Claim() {
 		@Override
+		public String getDescription() {
+			return "Fake Claim with getClassFilter returning FALSE";
+		}
+		@Override
 		public Operator[] getClassFilter() {
 			return new Operator[]{FALSE};
 		}
-
 		@Override
 		public Operator[] getOperators() {
 			fail("Should not have called getOperators");
