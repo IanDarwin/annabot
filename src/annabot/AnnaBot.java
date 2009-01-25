@@ -33,5 +33,19 @@ public class AnnaBot {
 		SourceType classesType = SourceUtils.classify(classesToTest);
 		System.out.printf("About to test w/ claims from %s %s%n", claimType, claims );
 		System.out.printf("... on classes from %s %s%n", classesType, classesToTest);
+		if (claimType != SourceType.CLASS) {
+			System.err.println("can only handle one claim class so far");			
+			return;
+		}
+		Class<Claim> c = (Class<Claim>) Class.forName(claims);
+		
+		if (classesType != SourceType.CLASS) {
+			System.err.println("can only handle one target class so far");			
+			return;
+		}
+				
+		Processor p = new Processor(c.newInstance());
+		final boolean result = p.process(Class.forName(classesToTest));
+		System.out.println(result ? "OK" : "Fail");
 	}
 }
