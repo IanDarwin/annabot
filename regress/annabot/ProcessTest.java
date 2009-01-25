@@ -2,6 +2,8 @@ package annabot;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+import static tree.OperatorUtils.FALSE;
 
 import org.junit.Test;
 
@@ -13,14 +15,46 @@ import demo.MyAnnotation;
 
 
 public class ProcessTest {
-	
-	Operator[] checks = {
-		new RequiresOne(
-			new MethodAnnotated(MyAnnotation.class))
+	Claim checks = new Claim() {
+		@Override
+		public Operator[] getClassFilter() {
+			return null;
+		}
+		@Override
+		public Operator[] getOperators() {
+			return new Operator[]{
+				new RequiresOne(
+					new MethodAnnotated(MyAnnotation.class))
+			};
+		}		
 	};
-	Operator[] failingChecks = {
-		new RequiresOne(
-			new MethodAnnotated(MyAnnotation.class))
+
+	Claim failingChecks = new Claim() {
+		@Override
+		public Operator[] getClassFilter() {
+			return null;
+		}
+		@Override
+		public Operator[] getOperators() {
+			return new Operator[]{
+				new RequiresOne(
+					new MethodAnnotated(MyAnnotation.class))
+			};
+		}		
+	};
+	
+	Claim noneShallPassFilter = new Claim() {
+		@Override
+		public Operator[] getClassFilter() {
+			return new Operator[]{FALSE};
+		}
+
+		@Override
+		public Operator[] getOperators() {
+			fail("Should not have called getOperators");
+			return null;
+		}
+		
 	};
 	
 	@Test
@@ -46,5 +80,11 @@ public class ProcessTest {
 	public void testFailureNoArgConstructor() {
 		Processor p = new Processor();
 		p.process(MyAnnotatedClass.class);
+	}
+	
+	@Test
+	public void testNegativeFilter() {
+		Processor p = new Processor(noneShallPassFilter);
+		p.process(Object.class);
 	}
 }
