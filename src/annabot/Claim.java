@@ -3,7 +3,7 @@ package annabot;
 import tree.Operator;
 
 /** A Claim is a Composite of a bunch
- * of Operators, making up the Assertion
+ * of Operators, making up one Assertion
  * about one API.
  */
 public abstract class Claim {
