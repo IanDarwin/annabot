@@ -8,7 +8,7 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(value=Suite.class)
 @SuiteClasses(value={
-	ProcessTest.class,
+	ProcessTest.class
 })
 public class AllTests {
 	// No Code Needed
