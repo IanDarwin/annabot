@@ -1,7 +1,8 @@
 package tree;
 
-/** Toys for testing AND and OR classes */
+/** Static values, for e.g. testing AND and OR classes */
 public abstract class LogicBaseTest {
+	
 	public static final Operator TRUE = new Operator() {
 		public boolean process(Class<?> c) {
 			return true;
