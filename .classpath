@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="lib/javaee.jar"/>
 	<classpathentry kind="lib" path="lib/antlr-3.1.1.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/darwinsys-api"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>
