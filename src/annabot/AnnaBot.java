@@ -1,5 +1,8 @@
 package annabot;
 
+import java.util.List;
+
+import com.darwinsys.io.ClassSourceUtils;
 import com.darwinsys.io.SourceType;
 import com.darwinsys.io.SourceUtils;
 
@@ -11,9 +14,7 @@ public class AnnaBot {
 			"Usage: AnnaBot claims classes";
 		System.err.println(usage);
 		System.exit(i);
-	}
-		
-	
+	}	
 	
 	/**
 	 * Annotations Assertion Based Object Testing for Java
@@ -33,22 +34,19 @@ public class AnnaBot {
 		SourceType classesType = SourceUtils.classify(classesToTest);
 		System.out.printf("About to test w/ claims from %s %s%n", claimType, claims );
 		System.out.printf("... on classes from %s %s%n", classesType, classesToTest);
-		if (claimType != SourceType.CLASS) {
-			System.err.println("can only handle one claim class so far");			
-			return;
-		}
-		Class<Claim> c = (Class<Claim>) Class.forName(claims);
+		List<Class<?>> claimClasses = ClassSourceUtils.classListFromSource(claims);
+		List<Class<?>> targets = ClassSourceUtils.classListFromSource(classesToTest);
 		
-		if (classesType != SourceType.CLASS) {
-			System.err.println("can only handle one target class so far");			
-			return;
+		// The big bad expensive NxM loop: do all the work.
+		for (Class<?>c : claimClasses) {
+			
+			Class<Claim> cc = (Class<Claim>)c;
+			Processor p = new Processor(cc.newInstance());
+
+			for (Class<?> clazz : targets) {
+				System.out.printf("Class %s Result %s", classesToTest, 
+						p.process(clazz) ? "OK" : "Fail");
+			}
 		}
-				
-		Processor p = new Processor(c.newInstance());
-		final boolean result = p.process(Class.forName(classesToTest));
-		System.out.printf(
-				"Class %s Result %s",
-				classesToTest,
-				result ? "OK" : "Fail");
 	}
 }
