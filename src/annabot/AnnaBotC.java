@@ -14,7 +14,13 @@ import annabot.antlr.GrammarLexer;
 import annabot.antlr.GrammarParser;
 import annabot.antlr.TreeWalker;
 
-public class AnnaBot1 {
+/** The AnnaBot Compiler - read a .claim file
+ * and generate a compiled Java program (either
+ * .java - a preprocessor - or .class, a true compiler).
+ * At present it reads .claim files but doesn't output
+ * the tree.
+ */
+public class AnnaBotC {
 	
     private static boolean debug = true;
 
