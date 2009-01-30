@@ -32,9 +32,9 @@ public class AnnaBot {
 		SourceType claimType = SourceUtils.classify(claims);
 		String classesToTest = args[1];
 		SourceType classesType = SourceUtils.classify(classesToTest);
-		System.out.printf("About to test w/ claims from %s %s%n", claimType, claims );
-		System.out.printf("... on classes from %s %s%n", classesType, classesToTest);
+		System.out.printf("Getting list of claims from %s %s%n", claimType, claims );
 		List<Class<?>> claimClasses = ClassSourceUtils.classListFromSource(claims);
+		System.out.printf("Getting list of classes from %s %s%n", classesType, classesToTest);
 		List<Class<?>> targets = ClassSourceUtils.classListFromSource(classesToTest);
 		
 		// The big bad expensive NxM loop: do all the work.
