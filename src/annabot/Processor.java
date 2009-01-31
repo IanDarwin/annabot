@@ -14,7 +14,7 @@ public class Processor {
 		this.checks = checks;
 	}
 	
-	/** Process a given class with  the default list of Operators */
+	/** Process a given class with the provided list of Operators */
 	public boolean process(Class<?> target, Claim checks) {
 		if (checks == null) {
 			throw new IllegalStateException(
@@ -40,7 +40,7 @@ public class Processor {
 		return true;
 	}
 	
-	/** Process a given class with a non-default list of Operators */
+	/** Process a given class with the default list of Operators */
 	public boolean process(Class<?> target) {
 		return process(target, checks);
 	}
