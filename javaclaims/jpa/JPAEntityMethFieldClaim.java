@@ -3,7 +3,7 @@ package demo;
 import annabot.Claim;
 import tree.*;
 
-public class JPAEntityClaims extends Claim {
+public class JPAEntityMethFieldClaim extends Claim {
 	
 	public String getDescription() {
 		return "JPA Entities may have field OR method annotations, not both";
