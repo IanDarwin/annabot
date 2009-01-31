@@ -75,16 +75,35 @@ public class AnnaBot {
 		System.out.printf("Getting list of classes from %s %s%n", classesType, classesToTest);
 		List<Class<?>> targets = ClassSourceUtils.classListFromSource(classesToTest, classPathElements);
 		
-		// The big bad expensive NxM loop: do all the work.
+		process(targets, claimClasses);
+	}
+
+	/**
+	 * The big bad expensive mXn loop: do all the work,
+	 * running m claims on each of n targets, report results.
+	 * @param targets
+	 * @param claimClasses
+	 * @throws InstantiationException
+	 * @throws IllegalAccessException
+	 */
+	@SuppressWarnings("unchecked")
+	static void process(List<Class<?>> targets, List<Class<?>> claimClasses) throws Exception {
+		int classes = 0, errs = 0;
+		
 		for (Class<?>c : claimClasses) {
 			
 			Class<Claim> cc = (Class<Claim>)c;
 			Processor p = new Processor(cc.newInstance());
 
-			for (Class<?> clazz : targets) {
-				Debug.printf("annabot", "Class %s%n", clazz);
-				p.process(clazz);
+			for (Class<?> target : targets) {
+				Debug.printf("annabot", "Class %s%n", target);
+				++classes;
+				// process() will report errors via
+				// Process.reporter.repor().
+				errs += p.process(target) ? 0 : 1;
 			}
 		}
+		System.out.printf(
+			"AnnaBot: found %d error(s) in %d classes%n", errs, classes);
 	}
 }

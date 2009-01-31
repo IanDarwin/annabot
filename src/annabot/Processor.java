@@ -2,6 +2,9 @@ package annabot;
 
 import tree.Operator;
 
+/** A Mediator for the Claim classes
+ * and the targets being verified.
+ */
 public class Processor {
 	
 	Claim claim;
