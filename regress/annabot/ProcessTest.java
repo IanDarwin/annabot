@@ -87,7 +87,7 @@ public class ProcessTest {
 		assertTrue(
 			p.process(MyAnnotatedClass.class, checks));
 	}
-	@Test(expected=IllegalStateException.class)
+	@Test(expected=NullPointerException.class)
 	public void testFailureNoArgConstructor() {
 		Processor p = new Processor();
 		p.process(MyAnnotatedClass.class);
