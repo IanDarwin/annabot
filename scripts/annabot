@@ -18,6 +18,10 @@ do
 	echo === Starting $d ===
 	(
 	cd $d
-	java -classpath ${ANNABOT_HOME}:${CLASSPATH}:$PWD annabot.AnnaBot1 $(find . -name \*.class|sed 's/^\.\///')
+	java -Ddebug.sourceutils \
+		-classpath ${ANNABOT_HOME}:${HOME}/workspace/darwinsys-api/build:${CLASSPATH}:$PWD \
+		annabot.AnnaBot \
+			-jarDir ${HOME}/workspace.tcp/tcpseam/web/WEB-INF/lib/  \
+			claims.JPAEntityMethodFieldClaims ${HOME}/workspace.tcp/tcpseam/build/classes
 	)
 done
