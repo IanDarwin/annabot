@@ -12,6 +12,7 @@ import com.darwinsys.io.SourceType;
 import com.darwinsys.io.SourceUtils;
 import com.darwinsys.lang.GetOpt;
 import com.darwinsys.lang.GetOptDesc;
+import com.darwinsys.util.Debug;
 
 
 public class AnnaBot {
@@ -81,8 +82,8 @@ public class AnnaBot {
 			Processor p = new Processor(cc.newInstance());
 
 			for (Class<?> clazz : targets) {
-				System.out.printf("Class %s Result %s%n", clazz, 
-						p.process(clazz) ? "OK" : "Fail");
+				Debug.printf("annabot", "Class %s%n", clazz);
+				p.process(clazz);
 			}
 		}
 	}
