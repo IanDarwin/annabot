@@ -1,4 +1,4 @@
-package demo;
+package claims;
 
 import annabot.Claim;
 import tree.*;
