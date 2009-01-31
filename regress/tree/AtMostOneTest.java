@@ -13,7 +13,7 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 /*
- * This is a JUnit test for the "AtMostOne" Operator.
+ * JUnit test for the "AtMostOne" Operator.
  */
 @RunWith(value=Parameterized.class)
 public class AtMostOneTest {
@@ -31,17 +31,18 @@ public class AtMostOneTest {
 		return Arrays.asList(data);
 	}
 
-	Operator[] data;
 	private boolean expected;
+	Operator[] data;
 
 	/** Constructor, gets arguments from data array; cast as needed */
 	public AtMostOneTest(Object expected, Object value) {
-		this.data = (Operator[])value;
 		this.expected = (Boolean) expected;
+		this.data = (Operator[])value;
 	}
 
 	@Test public void testPositive() {
-		// Any class will do as the 2nd arg here
+		// Any class will do as the "Class" arg here as long as
+		// all the Operators from data() are TRUE or FALSE
 		assertEquals(expected, new AtMostOne(data).process(getClass()));
 	}
 }
