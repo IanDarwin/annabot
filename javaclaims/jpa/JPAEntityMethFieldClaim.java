@@ -17,7 +17,7 @@ public class JPAEntityMethFieldClaim extends Claim {
 	public Operator[] getOperators() {
 		return new Operator[] {
 			new AtMostOne(
-					new ClassAnnotated("javax.persistence.*"),
+					new FieldAnnotated("javax.persistence.*"),
 					new MethodAnnotated("javax.persistence.*"))
 		};
 	}
