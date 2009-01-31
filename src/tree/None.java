@@ -9,12 +9,12 @@ public class None implements Operator {
 	}
 	
 	public boolean process(Class<?> c) {
-		int numTrue = 0;
 		for (Operator o : operators) {
+			// If any one is true, the whole thing is false.
 			if (o.process(c)) {
-				numTrue++;
+				return false;
 			}
 		}
-		return numTrue == 0;
+		return true;
 	}
 }
