@@ -51,6 +51,10 @@ public class ProcessTest {
 		}		
 	};
 	
+	/**
+	 * Fake claim that should return true since no
+	 * class will pass its filter.
+	 */
 	Claim noneShallPassFilter = new Claim() {
 		@Override
 		public String getDescription() {
@@ -96,6 +100,6 @@ public class ProcessTest {
 	@Test
 	public void testNegativeFilter() {
 		Processor p = new Processor(noneShallPassFilter);
-		p.process(Object.class);
+		assertTrue(p.process(Object.class));
 	}
 }
