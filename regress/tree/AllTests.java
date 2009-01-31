@@ -9,6 +9,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(value=Suite.class)
 @SuiteClasses(value={
 	AndTest.class,
+	AnnotatedTest.class,
 	AtMostOneTest.class,
 	ClassAnnotatedTest.class,
 	FieldAnnotatedTest.class,
