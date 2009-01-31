@@ -81,7 +81,7 @@ public class AnnaBot {
 			Processor p = new Processor(cc.newInstance());
 
 			for (Class<?> clazz : targets) {
-				System.out.printf("Class %s Result %s", classesToTest, 
+				System.out.printf("Class %s Result %s%n", clazz, 
 						p.process(clazz) ? "OK" : "Fail");
 			}
 		}
