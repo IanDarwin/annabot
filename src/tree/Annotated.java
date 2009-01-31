@@ -5,7 +5,7 @@ import java.lang.reflect.AccessibleObject;
 import java.util.regex.Pattern;
 
 /** Base for {Class,Method,Field}Annotated classes */
-public class Annotated {
+public abstract class Annotated {
 	protected String annotationName;
 	protected Pattern regex;
 	protected Class<? extends Annotation> annotationClass;
@@ -27,7 +27,7 @@ public class Annotated {
 	 * @param annotation
 	 * @return
 	 */
-	protected String annotationClassName(Annotation annotation) {
+	protected static String annotationClassName(Annotation annotation) {
 		String string = annotation.toString();
 		String annName = string.substring(1).replaceFirst("\\(.*", "");
 		return annName;
