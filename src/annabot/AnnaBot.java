@@ -70,12 +70,14 @@ public class AnnaBot {
 		SourceType claimType = SourceUtils.classify(claims);
 		String classesToTest = restOfArgs.get(1);
 		SourceType classesType = SourceUtils.classify(classesToTest);
-		System.out.printf("Getting list of claims from %s %s%n", claimType, claims );
 		List<Class<?>> claimClasses = ClassSourceUtils.classListFromSource(claims);
-		System.out.printf("Getting list of classes from %s %s%n", classesType, classesToTest);
-		List<Class<?>> targets = ClassSourceUtils.classListFromSource(classesToTest, classPathElements);
+		System.out.printf("Using %d claims from %s %s%n",
+				claimClasses.size(), claimType.toString().toLowerCase(), claims );
+		List<Class<?>> targetClasses = ClassSourceUtils.classListFromSource(classesToTest, classPathElements);
+		System.out.printf("Checking %d targets from %s %s%n",
+				targetClasses.size(), classesType.toString().toLowerCase(), classesToTest);
 		
-		process(targets, claimClasses);
+		process(targetClasses, claimClasses);
 	}
 
 	/**
@@ -89,6 +91,7 @@ public class AnnaBot {
 	@SuppressWarnings("unchecked")
 	static void process(List<Class<?>> targets, List<Class<?>> claimClasses) throws Exception {
 		int classes = 0, errs = 0;
+		long now = System.currentTimeMillis();
 		
 		for (Class<?> target : targets) {
 			Debug.printf("annabot", "Class %s%n", target);
@@ -104,7 +107,9 @@ public class AnnaBot {
 				errs += p.process(target) ? 0 : 1;
 			}
 		}
+		long end = System.currentTimeMillis();
 		System.out.printf(
-			"AnnaBot: found %d error(s) in %d classes%n", errs, classes);
+			"AnnaBot: found %d error(s) in %d classes, time %.1f seconds%n", 
+			errs, classes, (end - now) / 1000D);
 	}
 }
