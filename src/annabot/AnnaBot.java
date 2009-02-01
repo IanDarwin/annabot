@@ -100,7 +100,7 @@ public class AnnaBot {
 				Processor p = new Processor(cc.newInstance());
 
 				// process() will report errors via
-				// Process.reporter.repor().
+				// Process.reporter.report().
 				errs += p.process(target) ? 0 : 1;
 			}
 		}
