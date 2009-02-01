@@ -90,14 +90,15 @@ public class AnnaBot {
 	static void process(List<Class<?>> targets, List<Class<?>> claimClasses) throws Exception {
 		int classes = 0, errs = 0;
 		
-		for (Class<?>c : claimClasses) {
-			
-			Class<Claim> cc = (Class<Claim>)c;
-			Processor p = new Processor(cc.newInstance());
+		for (Class<?> target : targets) {
+			Debug.printf("annabot", "Class %s%n", target);
+			++classes;
 
-			for (Class<?> target : targets) {
-				Debug.printf("annabot", "Class %s%n", target);
-				++classes;
+			for (Class<?>c : claimClasses) {
+
+				Class<Claim> cc = (Class<Claim>)c;
+				Processor p = new Processor(cc.newInstance());
+
 				// process() will report errors via
 				// Process.reporter.repor().
 				errs += p.process(target) ? 0 : 1;
