@@ -1,4 +1,4 @@
-package claims;
+package jpa;
 
 import annabot.Claim;
 import tree.*;
