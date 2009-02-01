@@ -11,17 +11,17 @@ case $# in
 *)	DIR="$@"
 esac
 
-# TODO parse args
+DEBUG="-Ddebug.sourceutils"
 
 for d in ${DIR}
 do
 	echo === Starting $d ===
 	(
 	cd $d
-	java -Ddebug.sourceutils \
-		-classpath ${ANNABOT_HOME}:${HOME}/workspace/darwinsys-api/build:${CLASSPATH}:$PWD \
+	java ${DEBUG} \
+		-classpath ${ANNABOT_HOME}:${HOME}/workspace/darwinsys-api/build:${CLASSPATH}:${HOME}/lib/jsf-api.jar:${HOME}/lib/quartz.jar:$PWD \
 		annabot.AnnaBot \
 			-jarDir ${HOME}/workspace.tcp/tcpseam/web/WEB-INF/lib/  \
-			claims.JPAEntityMethodFieldClaims ${HOME}/workspace.tcp/tcpseam/build/classes
+			claimclasses ${HOME}/workspace.tcp/tcpseam/build/classes
 	)
 done
