@@ -69,6 +69,9 @@ public class AnnaBot {
 		String claims = restOfArgs.get(0);
 		SourceType claimType = SourceUtils.classify(claims);
 		String classesToTest = restOfArgs.get(1);
+
+		long now = System.currentTimeMillis();
+
 		SourceType classesType = SourceUtils.classify(classesToTest);
 		List<Class<?>> claimClasses = ClassSourceUtils.classListFromSource(claims);
 		System.out.printf("Using %d claims from %s %s%n",
@@ -77,6 +80,10 @@ public class AnnaBot {
 		System.out.printf("Checking %d targets from %s %s%n",
 				targetClasses.size(), classesType.toString().toLowerCase(), classesToTest);
 		
+		long end = System.currentTimeMillis();
+		System.out.printf(
+			"AnnaBot: Initialization took %.1f seconds%n", 
+			(end - now) / 1000D);
 		process(targetClasses, claimClasses);
 	}
 
