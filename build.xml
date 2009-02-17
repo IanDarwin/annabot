@@ -39,9 +39,18 @@
 			<arg>6 * 7</arg>
 		</java>
     </target>
+	
+	<!-- ================================= 
+	     target: test          
+	     ================================= -->
+	<target name="test" depends="compile">
+		<junit>
+			<classpath refid="antlr.classpath"/>
+		</junit>
+	</target>
 
     <!-- - - - - - - - - - - - - - - - - - 
-          target: depends                      
+          target: compile                      
          - - - - - - - - - - - - - - - - - -->
     <target name="compile" depends="antlr">
     	<javac>
