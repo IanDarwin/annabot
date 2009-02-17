@@ -16,9 +16,13 @@ public class JPAEntityMethFieldClaim extends Claim {
 
 	public Operator[] getOperators() {
 		return new Operator[] {
+			// make sure they don't annotate both methods and fields
 			new AtMostOne(
 					new FieldAnnotated("javax.persistence.*"),
-					new MethodAnnotated("javax.persistence.*"))
+					new MethodAnnotated("javax.persistence.*")),
+			// make sure if they annotate methods, it's not setters
+			new None(
+					new MethodAnnotated("javax.persistence.*", "set*"))
 		};
 	}
 }
