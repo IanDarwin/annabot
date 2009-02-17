@@ -28,7 +28,8 @@ public class Processor {
 		}
 		
 		// If the Claim does not apply to this class,
-		// it is not an error, so return true.
+		// it is not an error, so return true
+		// from the whole method, indicating "OK"ness.
 		final Operator[] classFilter = claim.getClassFilter();
 		if (classFilter != null) {
 			for (Operator check: classFilter) {
@@ -37,7 +38,8 @@ public class Processor {
 				}
 			}
 		}
-		// Run the actual tests
+		// Run the actual tests; if any of these fails.
+		// return false as the test has failed.
 		for (Operator check: claim.getOperators()) {
 			if (!check.process(target)) {
 				reporter.report(target, claim);
