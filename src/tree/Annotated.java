@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 /** Base for {Class,Method,Field}Annotated classes */
 public abstract class Annotated {
 	protected String annotationName;
-	protected Pattern regex;
+	protected Pattern annotationPattern;
 	protected Class<? extends Annotation> annotationClass;
 
 	/** Return true if the given annotation name
@@ -17,7 +17,7 @@ public abstract class Annotated {
 	 * @return
 	 */
 	protected boolean annotationNameMatches(String annName) {
-		return regex.matcher(annName).matches();
+		return annotationPattern.matcher(annName).matches();
 	}
 
 	/**

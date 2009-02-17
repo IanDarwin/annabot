@@ -12,13 +12,13 @@ public class FieldAnnotated extends Annotated implements Operator {
 	
 	public FieldAnnotated(String name) {
 		this.annotationName = name;
-		this.regex = Pattern.compile(name.replaceAll("\\*", ".*"));
+		this.annotationPattern = Pattern.compile(name.replaceAll("\\*", ".*"));
 		this.annotationClass = null;
 	}
 
 	public FieldAnnotated(Class<? extends Annotation> cl) {
 		this.annotationName = null;
-		this.regex = null;
+		this.annotationPattern = null;
 		this.annotationClass = cl;
 	}
 
