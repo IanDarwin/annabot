@@ -39,4 +39,17 @@ public class MethodAnnotatedTest {
 		Operator t = new MethodAnnotated(java.lang.SuppressWarnings.class);
 		assertFalse(t.process(Object.class));
 	}
+	
+	@MyAnnotation
+	@Test public void doTestTrueWithAnnoClassAndMethodPatt() {
+		Operator t =
+			new MethodAnnotated(MyAnnotation.class, "do*");
+		assertTrue(t.process(getClass()));
+	}
+	
+	@Test public void doTestFalseWithAnnoClassAndMethodPatt() {
+		Operator t =
+			new MethodAnnotated(MyAnnotation.class, "fredzz");
+		assertFalse(t.process(getClass()));
+	}
 }
