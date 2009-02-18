@@ -1,5 +1,6 @@
 package ejb3;
 
+import javax.ejb.MessageDriven;
 import javax.ejb.Stateful;
 import javax.ejb.Stateless;
 import javax.persistence.Entity;
@@ -28,7 +29,8 @@ public class EJB3TypeClaim extends Claim {
 		    new AtMostOne(
 		    		new ClassAnnotated(Entity.class), 
 		    		new ClassAnnotated(Stateless.class), 
-		    		new ClassAnnotated(Stateful.class))
+		    		new ClassAnnotated(Stateful.class),
+		    		new ClassAnnotated(MessageDriven.class))
 		};
 	}
 }
