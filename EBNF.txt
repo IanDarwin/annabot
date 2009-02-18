@@ -12,7 +12,8 @@ VERB:=	REQUIRE | ATMOSTONE
 
 claim:=	classAnnotated | methodAnnotated | fieldAnnotated
 
-classAnnotated:=	CLASS.ANNOTATED '(' name ')'
+// classAnnotated takes an annotation and optionally a method-pattern
+classAnnotated:=	CLASS.ANNOTATED '(' name ( ',' name-pattern )?')'
 methodAnnotated:=	METHOD.ANNOTATED '(' name ')'
 fieldAnnotated:=	FIELD.ANNOTATED '(' name ')'
 
@@ -24,4 +25,5 @@ CLASS_ANNOTATED:= "class.annotated"
 METHOD_ANNOTATED:= "method.annotated"
 FIELD_ANNOTATED:= "field.annotated"
 
-name:=	/A-Z[A-Za-z]+/
+name:=	/[A-Za-z]+/
+name-pattern:- /[A-Za-z\*]+/

@@ -46,7 +46,8 @@ check:	classAnnotated | methodAnnotated | fieldAnnotated;
 
 classAnnotated:		CLASS_ANNOTATED '(' FULLPACKAGENAME ')';
 methodAnnotated:	METHOD_ANNOTATED '(' FULLPACKAGENAME ')';
-fieldAnnotated:		FIELD_ANNOTATED '(' FULLPACKAGENAME ')';
+fieldAnnotated:		FIELD_ANNOTATED '('
+					FULLPACKAGENAME ( ',' MEMBERNAME )? ')';
 
 error:	'{' ERROR QSTRING '}' ;
 
@@ -64,8 +65,9 @@ AND:				'&&';
 OR:					'||';
 NOT:				'!';
 ERROR:				'error';
-FULLPACKAGENAME:	'a'..'z' ('a'..'z'|'A'.'Z'|'.'|'*')+ ;
+FULLPACKAGENAME:	'a'..'z' ('a'..'z'|'A'..'Z'|'.'|'*')+ ;
 CLASSNAME:   		'A'..'Z' ('a'..'z'|'A'..'Z')+;
+MEMBERNAME:			('a'..'z'|'A'..'Z'|'*')+ ;
 QSTRING:			'"' ( options {greedy=false;} : . )* '"' ;
 fragment NEWLINE:	'\r'? '\n';	// allow for dog files.
 WHITESPACE:	(' '|'\t'|NEWLINE)+ {skip();} ;
