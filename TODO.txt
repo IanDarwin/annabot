@@ -16,7 +16,8 @@ Handle inherited annotations - union(getFields, getDeclaredFields)
 	A Claim syntax for specifying whether
 	given Annotations should be considered heritable.
 
-Extend syntax for annotation's elements.
+Extend syntax for annotation's elements, e.g.,
+	@Column(name="this is not a valid table name")
 
 Subclassing of claim files.
 
