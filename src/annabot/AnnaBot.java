@@ -46,7 +46,7 @@ public class AnnaBot {
 		List<String> classPathElements = new ArrayList<String>();
 		String cpe;
 		if ((cpe = optionsFound.get("c")) != null) {
-			final String[] split = cpe.split(":");
+			final String[] split = cpe.split(File.pathSeparator);
 			classPathElements.addAll(Arrays.asList(split));
 		}
 		if ((cpe = optionsFound.get("j")) != null) {
