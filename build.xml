@@ -10,7 +10,7 @@
  -->
 <project 
 	name="AnnaBotAnnotation Assertions-Based Object Testing"
-	default="run">
+	default="runsystests">
     <description>
      Annotation Assertions-Based Object Testing
     </description>
@@ -29,44 +29,51 @@
 	      </dirset>
 	</path>
 
-
-    <!-- ================================= 
-          target: run          
-         ================================= -->
-    <target name="run" depends="compile" description="--> description">
+    <target name="runcompiler" depends="compile" 
+         	description="Run the Antlr-based AnnaBot compiler">
         <java className="annabot.antlr.AnnaBot">
         	<classpath refid="antlr.classpath"/>
 			<arg>6 * 7</arg>
 		</java>
     </target>
 	
-	<!-- ================================= 
-	     target: test          
-	     ================================= -->
-	<target name="test" depends="compile">
+    <taskdef name="annabot" classname="annabot.ant.AnnaBotTask"
+    	classpath="${build}"/>
+	
+	<fileset id="claims">
+		<include name="${build/claims/ejb/*.class}"/>
+	</fileset>
+    		
+    <target name="runsystests">
+    	<annabot claims="${claims}">
+		</annabot>
+    </target>
+    
+	<target name="test" depends="compile"
+	    description="Run selftests">
 		<junit>
 			<classpath refid="antlr.classpath"/>
 		</junit>
 	</target>
 
-    <!-- - - - - - - - - - - - - - - - - - 
-          target: compile                      
-         - - - - - - - - - - - - - - - - - -->
-    <target name="compile" depends="antlr">
+    <target name="compile" depends="antlr"
+    	description="Compile everything">
     	<javac>
 			<classpath ref="antlr.classpath"/>
 		</javac>
     </target>
 
-	<target name="antlr">
+	<target name="antlr"
+    	description="Run Antlr to build the compiler pieces">
 		<antlr 
 			target="${src}/annabot/antlr/Grammar.g"
-			outputdirectory="${build}"
-			>
+			outputdirectory="${build}">
 			<classpath refid="antlr.classpath"/>
 		</antlr>
 	</target>
-	<target name="antlr-by-java">
+	
+	<target name="antlr-by-java"
+		description="Run Antlr to build the compiler pieces">
 		<java className="org.antlr.Tool">
 			<classpath refid="antlr.classpath"/>
 			<arg value="${src}/annabot/antlr/Grammar.g"/>
@@ -74,10 +81,7 @@
 		</java>
 	</target>
 <!--
-
-
 clean:
         @rm -f Grammar.tokens GrammarLexer.java GrammarParser.java Walker.java Walker.tokens
-
 -->
 </project>

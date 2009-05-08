@@ -1,5 +1,7 @@
 package annabot.ant;
 
+import java.util.Iterator;
+
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.types.Path;
@@ -13,13 +15,18 @@ public class AnnaBotTask extends Task {
 		super.init();
 	}
 	
-	public void addPath(Path claims) {
+	public void setClaims(Path claims) {
 		this.claims = claims;
 	}
 	
 	@Override
 	public void execute() throws BuildException {
-		System.out.println(claims);
+		final Iterator claimList = claims.iterator();
+		while (claimList.hasNext()) {
+			Object o = claimList.next();
+			System.out.println(o.getClass());
+			System.out.println(o);
+		}
 		super.execute();
 	}
 }
