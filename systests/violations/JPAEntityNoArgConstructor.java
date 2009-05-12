@@ -1,6 +1,7 @@
 package violations;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 
 /**
  * This class intentionally violates the rule
@@ -11,5 +12,9 @@ import javax.persistence.Entity;
 public class JPAEntityNoArgConstructor {
 	public JPAEntityNoArgConstructor(String name) {
 		// empty
+	}
+	@Id
+	public int getId() {
+		return 42;
 	}
 }
