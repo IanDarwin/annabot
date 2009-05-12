@@ -37,13 +37,12 @@
     </target>
 	
     <taskdef name="annabot" classname="annabot.ant.AnnaBotTask"
-    	classpath="${build}"/>
+    	classpath="${build}:${lib}/darwinsys.jar"/>
 	   		
     <target name="systests" description="System tests">
     	<annabot>
-    		<claims dir="${claims}">
-    			<include name="ejb3/**.class"/>
-    		</claims>
+    		<classpath path="lib/darwinsys.jar"/>
+    		<claims dir="${claims}" includes="ejb3/**.class"/>
     		<targets dir="${build}">
     			<include name="violations/**.class"/>
     		</targets>
