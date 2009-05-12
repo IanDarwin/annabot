@@ -6,6 +6,9 @@ For a quick demo, run
 
 java -classpath build:lib/javaee.jar:lib/darwinsys.jar annabot.AnnaBot claimclasses systestclasses
 
+ECLIPSE
+-------
+
 To set up for developing and testing AnnaBot as an Eclipse
 project, assuming you checked it out under Eclipse as a project:
 1) Create a new JUnit 4 Run Configuration:
@@ -34,3 +37,16 @@ AnnaBot: found 5 error(s) in 4 classes, time 0.3 seconds
 Now you can dive in and start working on the code!
 
 Remember: CVS update periodically. Send cvs diff -u (or Eclipse patch) diffs.
+
+NETBEANS
+--------
+If you want it, nobody will stop you.
+Better if you can send a "nbproject" folder
+(as long as it doesn't embed any full paths!).
+
+ANT
+---
+There is the outline of an Ant task but it
+does not work as of this writing.
+
+$Id$
