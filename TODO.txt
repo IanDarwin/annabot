@@ -1,10 +1,16 @@
-AnnABot - Annotation Assertion Based Object Testing
+AnnaBot - Annotation Assertion Based Object Testing
 
 Ian Darwin, http://www.darwinsys.com/
 
 Many of these are expanded in the accompanying Paper.
 
------------------------------------------------
+---------Infrastructure-----------------------
+
+N.B. Update build.xml for multiple output folders!!
+
+Convert debug calls to JULI logging.
+
+--------- Main AnnaBot ------------------------
 
 Use javassist in junit tests to synthesize classes to test.
 

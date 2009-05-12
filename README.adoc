@@ -1,4 +1,7 @@
-AnnaBot
+AnnaBot - Annotation Assertion Based Object Testing
+
+Ian Darwin, http://www.darwinsys.com/
+
 
 For a quick demo, run
 
