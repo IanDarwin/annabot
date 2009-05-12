@@ -53,4 +53,9 @@ public class Processor {
 	public boolean process(Class<?> target) {
 		return process(target, claim);
 	}
+	
+	@Override
+	public String toString() {
+		return "Processor(" + claim.getClass() + ")";
+	}
 }
