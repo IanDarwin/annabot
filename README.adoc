@@ -2,7 +2,35 @@ AnnaBot - Annotation Assertion Based Object Testing
 
 Ian Darwin, http://www.darwinsys.com/
 
-
 For a quick demo, run
 
 java -classpath build:lib/javaee.jar:lib/darwinsys.jar annabot.AnnaBot claimclasses systestclasses
+
+To set up for developing and testing AnnaBot as an Eclipse
+project, assuming you checked it out under Eclipse as a project:
+1) Create a new JUnit 4 Run Configuration:
+	Name: AnnaBot Unit Tests
+	Class: AnnaBotTests
+
+Run this; it should run > 50 tests and give a green bar.
+
+2) Create a Java Application Configuration
+	Name: AnnaBot System Tests
+	Class: annabot.AnnaBot
+	Arguments -> Application Arguments: claimclasses systestclasses
+
+Run this; it should give output something like the following:
+
+Using 7 claims from directory claimclasses
+Checking 4 targets from directory systestclasses
+AnnaBot: Initialization took 0.1 seconds
+class violations.JPAEntityNoArgConstructor: JPA Entities must have a no-arg constructor
+class violations.JPAEntityMethodFieldAnnotated: JPA Entity must have an ID
+class violations.JPAEntityMethodFieldAnnotated: JPA Entities may have field OR method annotations, not both
+class violations.JPAEntityHasId: JPA Entity must have an ID
+class violations.JPAEntitySetMethodAnnotated: JPA Entities may have field OR method annotations, not both
+AnnaBot: found 5 error(s) in 4 classes, time 0.3 seconds
+
+Now you can dive in and start working on the code!
+
+Remember: CVS update periodically. Send cvs diff -u (or Eclipse patch) diffs.
