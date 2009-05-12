@@ -22,6 +22,7 @@ public class NoneTest {
 	@Parameters
 	public static List<Object[]> data() {
 		final Object[][] data = new Object[][] {
+				// for "None", if any one is true, the whole thing is false.
 				{ false, new Operator[] { TRUE } },
 				{ true, new Operator[] { FALSE } },
 				{ false, new Operator[] { FALSE, TRUE } },
@@ -41,7 +42,7 @@ public class NoneTest {
 	}
 
 	@Test public void testPositive() {
-		// Any class will do as the 2nd arg here
+		// Any class will do as the 'class' arg here
 		assertEquals(expected, new None(data).process(getClass()));
 	}
 }
