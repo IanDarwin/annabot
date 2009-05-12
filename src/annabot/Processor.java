@@ -20,7 +20,12 @@ public class Processor {
 		this.claim = checks;
 	}
 	
-	/** Process a given class with the provided list of Operators */
+	/** Process a given class with the constructed-in Claim (list of Operators) */
+	public boolean process(Class<?> target) {
+		return process(target, claim);
+	}
+	
+	/** Process a given class with the provided Claim (list of Operators) */
 	public boolean process(Class<?> target, Claim claim) {
 		if (claim == null) {
 			throw new NullPointerException(
@@ -47,11 +52,6 @@ public class Processor {
 			}
 		}
 		return true;
-	}
-	
-	/** Process a given class with the default list of Operators */
-	public boolean process(Class<?> target) {
-		return process(target, claim);
 	}
 	
 	@Override
