@@ -14,7 +14,6 @@ import com.darwinsys.lang.GetOpt;
 import com.darwinsys.lang.GetOptDesc;
 import com.darwinsys.util.Debug;
 
-
 public class AnnaBot {
 
 	protected static void usage(int i) {
@@ -38,8 +37,8 @@ public class AnnaBot {
 			new GetOptDesc('c', "classpath", true),
 			new GetOptDesc('j', "jarDir", true),
 		};
-		GetOpt parser = new GetOpt(options);
-		Map<String,String> optionsFound = parser.parseArguments(args);
+		GetOpt argsParser = new GetOpt(options);
+		Map<String,String> optionsFound = argsParser.parseArguments(args);
 		if (optionsFound.get("?") != null) {
 			usage(1);
 		}
@@ -62,7 +61,7 @@ public class AnnaBot {
 				}
 			}
 		}
-		List<String> restOfArgs = parser.getFilenameList();
+		List<String> restOfArgs = argsParser.getFilenameList();
 		if (restOfArgs.size() != 2) {
 			usage(1);
 		}
@@ -84,6 +83,7 @@ public class AnnaBot {
 		System.out.printf(
 			"AnnaBot: Initialization took %.1f seconds%n", 
 			(end - now) / 1000D);
+		
 		process(targetClasses, claimClasses);
 	}
 
@@ -96,7 +96,7 @@ public class AnnaBot {
 	 * @throws IllegalAccessException
 	 */
 	@SuppressWarnings("unchecked")
-	static void process(List<Class<?>> targets, List<Class<?>> claimClasses) throws Exception {
+	public static void process(List<Class<?>> targets, List<Class<?>> claimClasses) throws Exception {
 		int classes = 0, errs = 0;
 		long now = System.currentTimeMillis();
 		
