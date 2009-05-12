@@ -32,7 +32,7 @@
          	description="Run the Antlr-based AnnaBot compiler">
         <java className="annabot.antlr.AnnaBot">
         	<classpath refid="antlr.classpath"/>
-			<arg>6 * 7</arg>
+			<arg>XXX not right...</arg>
 		</java>
     </target>
 	
