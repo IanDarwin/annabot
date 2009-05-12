@@ -2,4 +2,4 @@ AnnaBot
 
 For a quick demo, run
 
-java -classpath build:lib/darwinsys.jar annabot.Annabot claimclasses systestclasses
+java -classpath build:lib/javaee.jar:lib/darwinsys.jar annabot.AnnaBot claimclasses systestclasses
