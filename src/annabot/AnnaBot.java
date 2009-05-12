@@ -111,6 +111,7 @@ public class AnnaBot {
 
 				// process() will report errors via
 				// Process.reporter.report().
+				// System.out.println(p + " processing " + target);
 				errs += p.process(target) ? 0 : 1;
 			}
 		}
