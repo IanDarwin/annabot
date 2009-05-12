@@ -1,5 +1,6 @@
 package violations;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -9,8 +10,9 @@ import javax.persistence.Id;
  */
 @Entity
 public class JPAEntityMethodFieldAnnotated {
-	int id;
 	@Id
+	int id;
+	@Column
 	public void setId(int id) {
 		this.id = id;
 	}
