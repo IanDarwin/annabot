@@ -43,7 +43,7 @@ public class MethodAnnotatedTest {
 	@MyAnnotation
 	@Test public void doTestTrueWithAnnoClassAndMethodPatt() {
 		Operator t =
-			new MethodAnnotated(MyAnnotation.class, "do*");
+			new MethodAnnotated(MyAnnotation.class, "doT*");
 		assertTrue(t.process(getClass()));
 	}
 	
