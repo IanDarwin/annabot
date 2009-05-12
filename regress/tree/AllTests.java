@@ -14,9 +14,11 @@ import org.junit.runners.Suite.SuiteClasses;
 	AtMostOneTest.class,
 	ClassAnnotatedTest.class,
 	FieldAnnotatedTest.class,
+	HasNoArgumentConstructorTest.class,
 	MethodAnnotatedTest.class,
-	OrTest.class,
+	MultipleOperatorsTest.class,
 	NoneTest.class,
+	OrTest.class,
 	RequiresOneTest.class
 })
 public class AllTests {
