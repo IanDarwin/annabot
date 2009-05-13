@@ -27,6 +27,11 @@ Extend syntax for annotation's elements, e.g.,
 
 Subclassing of claim files.
 
+Visibility:
+	Spring's @Transactional is silently ignored if placed
+	on a protected/default/private method rather than public
+	*Spring Ref V 2.0.2, Section 9.5.6*
+
 Make as a plug-in for Eclipse, NB?.
 
 Make as a plug-in for FindBugs?
