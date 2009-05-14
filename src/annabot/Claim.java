@@ -21,10 +21,10 @@ public abstract class Claim {
 	public abstract Operator[] getClassFilter();
 
 	/**
-	 * @return a loist of Operators, all of which must return
+	 * @return a list of Operators, all of which must return
 	 * true for this class to be considered successful against
 	 * this claim.
-	 * Only used if the Operators in getClassFilter all pass.
+	 * Only called if the Operators in getClassFilter all pass.
 	 */
 	public abstract Operator[] getOperators();
 

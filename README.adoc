@@ -6,8 +6,8 @@ For a quick demo, run
 
 java -classpath build:lib/javaee.jar:lib/darwinsys.jar annabot.AnnaBot claimclasses systestclasses
 
-ECLIPSE
--------
+RUNNING ON ECLIPSE
+------------------
 
 To set up for developing and testing AnnaBot as an Eclipse
 project, assuming you checked it out under Eclipse as a project:
@@ -49,4 +49,37 @@ ANT
 There is the outline of an Ant task but it
 does not work as of this writing.
 
+OTHER PROJECTS
+--------------
+
+You should be able to:
+	jar up the "build" folder, add that jar to another project's classpath; 
+	jar up the "claimclasses" but don't add that jar to classpath
+	run AnnaBot with the claimclasses.jar and the target classes.
+
+WRITING NEW CLAIMS
+------------------
+Each Claim class has three required methods:
+
+	/* return the description of the problem this claim finds */
+	public abstract String getDescription();
+	
+	/** Return a list of Operators that are the "if" part of
+	 * a claim; if any of these operators fails, the class
+	 * will be bypassed and considered successful for this claim.
+	 */
+	public abstract Operator[] getClassFilter();
+
+	/** Return a list of Operators, all of which must return
+	 * true for this class to be considered successful against
+	 * this claim.
+	 * Only called if the Operators in getClassFilter all pass.
+	 */
+	public abstract Operator[] getOperators();
+
+Examine the existing claims folder for some examples.
+Please contribute back to the project any claims that you 
+develop for public APIs - thank you!
+
 $Id$
+
