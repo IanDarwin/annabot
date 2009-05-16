@@ -18,6 +18,7 @@
 	<property name="lib" value="lib"/>
 	<property name="build" value="build"/>
 	<property name="claims" value="claimclasses"/>
+	<property name="systestclasses" value="systestclasses"/>
 
 	<path id="antlr.classpath">
 	      <fileset dir="${lib}">
@@ -36,16 +37,14 @@
 		</java>
     </target>
 	
-    <taskdef name="annabot" classname="annabot.ant.AnnaBotTask"
-    	classpath="${build}:${lib}/darwinsys.jar"/>
+    <taskdef name="annabot" classname="annabot.ant.AnnaBotTask2"
+    	classpath="${build}:${claims}:${lib}/darwinsys.jar"/>
 	   		
     <target name="systests" description="System tests">
-    	<annabot>
-    		<classpath path="lib/darwinsys.jar"/>
-    		<claims dir="${claims}" includes="ejb3/**.class"/>
-    		<targets dir="${build}">
-    			<include name="violations/**.class"/>
-    		</targets>
+    	<annabot
+    		claims="${claims}"
+    		targets="${systestclasses}">
+    		<classpath path="${build}:lib/darwinsys.jar"/>
    		</annabot>
     </target>
     
