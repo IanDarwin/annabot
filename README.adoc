@@ -9,6 +9,15 @@ java -classpath build:lib/javaee.jar:lib/darwinsys.jar annabot.AnnaBot claimclas
 RUNNING ON ECLIPSE
 ------------------
 
+The CVS module "annabot" is the root of an Eclipse project.
+The setup is a bit unusual: there are several source folders
+AND several output folders:
+	Input			Output
+	-----			------
+	src,regress		build
+	claims			claimclasses
+	systests		systestclasses
+	
 To set up for developing and testing AnnaBot as an Eclipse
 project, assuming you checked it out under Eclipse as a project:
 1) Create a new JUnit 4 Run Configuration:

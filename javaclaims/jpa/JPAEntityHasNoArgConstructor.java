@@ -16,9 +16,7 @@ public class JPAEntityHasNoArgConstructor extends Claim {
 
 	public Operator[] getOperators() {
 		return new Operator[] {
-			new RequiresOne(
 				new HasNoArgumentConstructor()
-			)
 		};
 	}
 }

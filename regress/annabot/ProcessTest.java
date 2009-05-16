@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import tree.MethodAnnotated;
 import tree.Operator;
-import tree.RequiresOne;
+import tree.Or;
 import demo.MyAnnotatedClass;
 import demo.MyAnnotation;
 
@@ -27,7 +27,7 @@ public class ProcessTest {
 		@Override
 		public Operator[] getOperators() {
 			return new Operator[]{
-				new RequiresOne(
+				new Or(
 					new MethodAnnotated(MyAnnotation.class))
 			};
 		}		
@@ -45,7 +45,7 @@ public class ProcessTest {
 		@Override
 		public Operator[] getOperators() {
 			return new Operator[]{
-				new RequiresOne(
+				new Or(
 					new MethodAnnotated(MyAnnotation.class))
 			};
 		}		

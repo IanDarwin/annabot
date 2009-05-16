@@ -4,7 +4,7 @@ import tree.ClassAnnotated;
 import tree.FieldAnnotated;
 import tree.MethodAnnotated;
 import tree.Operator;
-import tree.RequiresOne;
+import tree.Or;
 import annabot.Claim;
 
 /** 
@@ -23,8 +23,8 @@ public class JPAEntityHasIdClaim extends Claim {
 
 	public Operator[] getOperators() {
 		return new Operator[] {
-			new RequiresOne(
-					new FieldAnnotated("javax.persistence.Id"),
+			new Or(
+					new FieldAnnotated(javax.persistence.Id.class),
 					new MethodAnnotated(javax.persistence.Id.class))
 		};
 	}

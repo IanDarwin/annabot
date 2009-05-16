@@ -18,8 +18,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	MethodAnnotatedTest.class,
 	MultipleOperatorsTest.class,
 	NoneTest.class,
-	OrTest.class,
-	RequiresOneTest.class
+	OrTest.class
 })
 public class AllTests {
 	// No Code Needed
