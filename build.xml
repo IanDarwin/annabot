@@ -76,7 +76,7 @@
 		<java className="org.antlr.Tool">
 			<classpath refid="antlr.classpath"/>
 			<arg value="-o"/>
-			<arg value="src/annabot/antlr"/>
+			<arg value="${user.dir}"/>
 			<arg value="${src}/annabot/antlr/Grammar.g"/>
 			<arg value="${src}/annabot/antlr/TreeWalker.g"/>
 		</java>
