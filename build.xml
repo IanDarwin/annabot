@@ -33,7 +33,7 @@
          	description="Run the Antlr-based AnnaBot compiler">
         <java className="annabot.antlr.AnnaBot">
         	<classpath refid="antlr.classpath"/>
-			<arg>XXX not right...</arg>
+			<arg>/home/ian/paper/annabot/examples/jpa.claim</arg>
 		</java>
     </target>
 	
@@ -75,6 +75,8 @@
 		description="Run Antlr to build the compiler pieces">
 		<java className="org.antlr.Tool">
 			<classpath refid="antlr.classpath"/>
+			<arg value="-o"/>
+			<arg value="src/annabot/antlr"/>
 			<arg value="${src}/annabot/antlr/Grammar.g"/>
 			<arg value="${src}/annabot/antlr/TreeWalker.g"/>
 		</java>
