@@ -27,11 +27,14 @@ public class AnnaBotC {
 	public static void main(String[] args) throws Exception {
         // Build the tree.
     	ANTLRInputStream input;
-    	if (args.length == 0)
+    	if (args.length == 0) {
+    		System.out.println("Reading stdin...");
 			input = new ANTLRInputStream(System.in);
-		else
+    	} else {
+    		System.out.println("Process: " + args[0]);
 			input = new ANTLRInputStream(new FileInputStream(args[0]));
-        GrammarLexer lexer = new GrammarLexer(input);
+    	}
+    	GrammarLexer lexer = new GrammarLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         GrammarParser parser = new GrammarParser(tokens);
         GrammarParser.program_return r = parser.program();
@@ -40,7 +43,7 @@ public class AnnaBotC {
         if (debug) {
         	DOTTreeGenerator gen = new DOTTreeGenerator();
         	StringTemplate st = gen.toDOT(t);
-        	Process p = Runtime.getRuntime().exec("dot -T xlib");
+        	Process p = Runtime.getRuntime().exec("dot -T ps -o /tmp/dot.ps");
         	new PrintStream(p.getOutputStream()).print(st);
 
         }
