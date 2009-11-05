@@ -26,9 +26,10 @@ import_stmt:	IMPORT FULLPACKAGENAME ';' {
 			System.out.println("IMPORT " + $FULLPACKAGENAME.text);
 			};
 
-stmt:	ifClause* '{' verb
-			'{' core ( ';' | error ) '}'
-		'}' ';'
+// Statement, with or without if ... { stmt } around.
+stmt:	ifClause '{' verb '{' core error? ';' '}'
+		'}'
+		| verb '{' core error? ';' '}' 
 		;
 
 verb:	REQUIRE | ATMOSTONE;
