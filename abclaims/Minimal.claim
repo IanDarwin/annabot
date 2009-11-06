@@ -1,4 +1,4 @@
-import foo;
+import foo.bar;
 
 claim Tag {
 	require { class.annotated(a.Foo) };
