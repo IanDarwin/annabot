@@ -22,7 +22,7 @@ import annabot.antlr.TreeWalker;
  */
 public class AnnaBotC {
 	
-    private static boolean debug = true;
+    private static boolean debug = false;
 
 	public static void main(String[] args) throws Exception {
         // Build the tree.
@@ -45,14 +45,17 @@ public class AnnaBotC {
         	StringTemplate st = gen.toDOT(t);
         	Process p = Runtime.getRuntime().exec("dot -T ps -o /tmp/dot.ps");
         	new PrintStream(p.getOutputStream()).print(st);
-
+        	//final int result = p.waitFor();
+        	//System.out.println("Debug printer return status " + result);
         }
         
         // Walk resulting tree once, for now.
+        // XXX Don't walk Tree until TreeWalker is updated
+        // and Parser generates a usable tree once more.
         // XXX have to walk once per class being tested.        
-        CommonTreeNodeStream nodes = new CommonTreeNodeStream(t);
-        TreeWalker walker = new TreeWalker(nodes);
-        walker.program();
+        // CommonTreeNodeStream nodes = new CommonTreeNodeStream(t);
+        // TreeWalker walker = new TreeWalker(nodes);
+        // walker.program();
     }
 }
 
