@@ -1,3 +1,6 @@
+import foo;
+
 claim Tag {
-	require { class.annotated(a.Foo); }
+	require { class.annotated(a.Foo) };
+	require { class.annotated(b.Foo) };
 }

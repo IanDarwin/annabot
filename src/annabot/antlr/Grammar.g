@@ -1,8 +1,8 @@
 grammar Grammar;
 
 options {
-    output=AST;
-    ASTLabelType=CommonTree; // type of $stat.tree ref etc...
+	output=AST;
+	ASTLabelType=CommonTree; // type of $stat.tree ref etc...
 }
 
 @header {
@@ -12,14 +12,12 @@ package annabot.antlr;
 package annabot.antlr;
 }
 
-program:	import_stmt* 
+program:	import_stmt*
 			CLAIM CLASSNAME '{'
 				stmt+
 			'}' {
-				System.out.println(
-				"Grammar: "+$stmt.tree.toStringTree()); 
+				System.out.println("Matched Program!"); 
 			}
-			EOF 				-> stmt
 			;
 
 import_stmt:	IMPORT FULLPACKAGENAME ';' {
@@ -27,21 +25,24 @@ import_stmt:	IMPORT FULLPACKAGENAME ';' {
 			};
 
 // Statement, with or without if ... { stmt } around.
-stmt:	ifClause '{' verb '{' core error? ';' '}'
-		'}'
-		| verb '{' core error? ';' '}' 
+stmt:	IF '(' checks ')' '{' phrase '}' ';' {
+			System.out.println("STMT-WITH-IF: " + $phrase.tree.toStringTree());
+			}
+		| phrase ';' {
+			System.out.println("SIMPLE-STMT: " + $phrase.tree.toStringTree());
+			}
+		;
+phrase:	verb '{' checks error? '}' 
 		;
 
 verb:	REQUIRE | ATMOSTONE;
 
-core:	check
+checks:	check
 		| NOT check
 		| ( check OR check )
 		| ( check AND check )
 		| ( check ',' check)
 		;
-
-ifClause: IF '(' check ')';
 
 check:	classAnnotated | methodAnnotated | fieldAnnotated;
 
@@ -50,7 +51,7 @@ methodAnnotated:	METHOD_ANNOTATED '(' FULLPACKAGENAME ')';
 fieldAnnotated:		FIELD_ANNOTATED '('
 					FULLPACKAGENAME ( ',' MEMBERNAME )? ')';
 
-error:	'{' ERROR QSTRING '}' ;
+error:	ERROR QSTRING;
 
 // Lexical Tokens
 
@@ -64,15 +65,15 @@ FIELD_ANNOTATED:	'field.annotated';
 IF:					'if';
 AND:				'&&';
 OR:					'||';
-NOT:				'!';
+NOT:				'!' | 'not';
 ERROR:				'error';
+// FULLORSHORTCLASSNAME: FULLPACKAGENAME | CLASSNAME;
 FULLPACKAGENAME:	'a'..'z' ('a'..'z'|'A'..'Z'|'.'|'*')+ ;
-CLASSNAME:   		'A'..'Z' ('a'..'z'|'A'..'Z')+;
+CLASSNAME:'A'..'Z' ('a'..'z'|'A'..'Z')+;
 MEMBERNAME:			('a'..'z'|'A'..'Z'|'*')+ ;
 QSTRING:			'"' ( options {greedy=false;} : . )* '"' ;
-fragment NEWLINE:	'\r'? '\n';	// allow for dog files.
+fragment NEWLINE:	'\r'? '\n';	// allow for ms-dog files.
 WHITESPACE:	(' '|'\t'|NEWLINE)+ {skip();} ;
 COMMENT:	'#' ( options {greedy=false;} : . )* NEWLINE+ {
 				skip();
 			};
-
