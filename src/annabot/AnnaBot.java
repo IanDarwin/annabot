@@ -65,16 +65,24 @@ public class AnnaBot {
 		if (restOfArgs.size() != 2) {
 			usage(1);
 		}
-		String claims = restOfArgs.get(0);
-		SourceType claimType = SourceUtils.classify(claims);
+		String claimSource = restOfArgs.get(0);
+		SourceType claimType = SourceUtils.classify(claimSource);
 		String classesToTest = restOfArgs.get(1);
 
 		long now = System.currentTimeMillis();
 
 		SourceType classesType = SourceUtils.classify(classesToTest);
-		List<Class<?>> claimClasses = ClassSourceUtils.classListFromSource(claims);
+		List<Class<?>> claimClasses = ClassSourceUtils.classListFromSource(claimSource);
+		List<Claim> claims = new ArrayList<Claim>(claimClasses.size());
+		for (Class<?> c : claimClasses) {
+			try {
+				claims.add((Claim)c.newInstance());
+			} catch (Exception e) {
+				System.err.println(e);
+			}
+		}
 		System.out.printf("Using %d claims from %s %s%n",
-				claimClasses.size(), claimType.toString().toLowerCase(), claims );
+				claims.size(), claimType.toString().toLowerCase(), claimSource );
 		List<Class<?>> targetClasses = ClassSourceUtils.classListFromSource(classesToTest, classPathElements);
 		System.out.printf("Checking %d targets from %s %s%n",
 				targetClasses.size(), classesType.toString().toLowerCase(), classesToTest);
@@ -84,19 +92,21 @@ public class AnnaBot {
 			"AnnaBot: Initialization took %.1f seconds%n", 
 			(end - now) / 1000D);
 		
-		process(targetClasses, claimClasses);
+		preVerify(claims);
+		process(targetClasses, claims);
+		postVerify(claims);
 	}
 
 	/**
 	 * The big bad expensive mXn loop: do all the work,
 	 * running m claims on each of n targets, report results.
 	 * @param targets
-	 * @param claimClasses
+	 * @param claims
 	 * @throws InstantiationException
 	 * @throws IllegalAccessException
 	 */
 	@SuppressWarnings("unchecked")
-	public static void process(List<Class<?>> targets, List<Class<?>> claimClasses) throws Exception {
+	public static void process(List<Class<?>> targets, List<Claim> claims) throws Exception {
 		int classes = 0, errs = 0;
 		long now = System.currentTimeMillis();
 		
@@ -104,10 +114,9 @@ public class AnnaBot {
 			Debug.printf("annabot", "Class %s%n", target);
 			++classes;
 
-			for (Class<?>c : claimClasses) {
+			for (Claim c : claims) {
 
-				Class<Claim> cc = (Class<Claim>)c;
-				Processor p = new Processor(cc.newInstance());
+				Processor p = new Processor(c);
 
 				// process() will report errors via
 				// Process.reporter.report().
@@ -119,5 +128,20 @@ public class AnnaBot {
 		System.out.printf(
 			"AnnaBot: found %d error(s) in %d classes, time %.1f seconds%n", 
 			errs, classes, (end - now) / 1000D);
+	}
+
+	static void preVerify(List<Claim> claims) throws InstantiationException, IllegalAccessException {
+		for (Claim c : claims) {
+			if (c instanceof PrePostVerify) {
+				((PrePostVerify)c).preVerify();
+			}
+		}
+	}
+	static void postVerify(List<Claim> claims) throws InstantiationException, IllegalAccessException {
+		for (Claim c : claims) {
+			if (c instanceof PrePostVerify) {
+				((PrePostVerify)c).postVerify();
+			}
+		}
 	}
 }

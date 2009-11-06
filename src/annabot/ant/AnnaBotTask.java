@@ -14,9 +14,10 @@ import org.apache.tools.ant.types.FileSet;
 import org.apache.tools.ant.types.Path;
 import org.apache.tools.ant.types.resources.FileResource;
 
-import com.darwinsys.io.ClassSourceUtils;
-
 import annabot.AnnaBot;
+import annabot.Claim;
+
+import com.darwinsys.io.ClassSourceUtils;
 
 public class AnnaBotTask extends Task {
 
@@ -60,7 +61,7 @@ public class AnnaBotTask extends Task {
 			}
 		}
 		System.out.println("CLAIMS:");
-		List<Class<?>> claimClasses = new ArrayList<Class<?>>();
+		List<Claim> claimClasses = new ArrayList<Claim>();
 		URL claimsURL = null;
 		try {
 			claimsURL = ClassSourceUtils.makeFileURL(claims.getDir().getAbsolutePath());
@@ -74,8 +75,12 @@ public class AnnaBotTask extends Task {
 		while (claimList.hasNext()) {
 			FileResource o = claimList.next();
 			File file = o.getFile();
-			claimClasses.add(ClassSourceUtils.doFile(file, cl));
-			System.out.println(file);
+			try {
+				claimClasses.add((Claim)(ClassSourceUtils.doFile(file, cl).newInstance()));			
+				System.out.println(file);
+			} catch (Exception e) {
+				System.err.println(e);
+			}
 		}
 		
 		System.out.println("TARGETS");
