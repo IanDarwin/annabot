@@ -1,16 +1,15 @@
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 claim JPA {
-if (class.annotated(Entity)) {
-    require method.annotated(Id) || field.annotated(Id);
-    atMostOne method.annotated(javax.persistence.*), field.annotated(javax.persistence.*)
-	{
+if (class.annotated(javax.persistence.Entity)) {
+    require method.annotated(javax.persistence.Id) || field.annotated(javax.persistence.Id);
+    atMostOne method.annotated(javax.persistence.ANY) || field.annotated(javax.persistence.ANY)	
         error "The JPA Spec only allows JPA annotations on methods OR fields";
-	}
-}
-if (class.annotated(Embeddable)) { 
-	require ! (method.annotated(Id) || field.annotated(Id)){}; # default message
-}
+};
+if (class.annotated(javax.persistence.Embeddable)) { 
+	noneof method.annotated(javax.persistence.Id) || field.annotated(javax.persistence.Id); # default message
+};
 }
 
 

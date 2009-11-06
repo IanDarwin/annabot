@@ -18,23 +18,22 @@ program:	import_stmt*
 			'}'
 			;
 
-// XXX should use IMPORT IMPORTNAME
 import_stmt:	IMPORT NAMEINPACKAGE ';' {
 			System.out.println("IMPORT " + $NAMEINPACKAGE.text);
 			};
 
 // Statement, with or without if ... { stmt } around.
-stmt:	IF '(' checks ')' '{' phrase '}' ';' {
+stmt:	IF '(' checks ')' '{' phrase+ '}' ';' {
 			System.out.println("STMT-WITH-IF: " + $phrase.tree.toStringTree());
 			}
-		| phrase ';' {
+		| phrase {
 			System.out.println("SIMPLE-STMT: " + $phrase.tree.toStringTree());
 			}
 		;
-phrase:	verb '{' checks error? '}' 
+phrase:	verb checks error? ';' 
 		;
 
-verb:	REQUIRE | ATMOSTONE;
+verb:	REQUIRE | ATMOSTONE | NONEOF;
 
 checks:	check
 		| NOT check
@@ -56,6 +55,7 @@ IMPORT:				'import';
 CLAIM:				'claim';
 REQUIRE:			'require';
 ATMOSTONE:			'atMostOne';
+NONEOF:				'noneof';
 CLASS_ANNOTATED:	'class.annotated';
 METHOD_ANNOTATED:	'method.annotated';
 FIELD_ANNOTATED:	'field.annotated';
@@ -71,8 +71,8 @@ DIGIT:				'0'..'9';
 IDENTIFIERCHAR:		LETTER | DIGIT | '_';
 IDENTIFIER:			LETTER IDENTIFIERCHAR*;
 NAMEINPACKAGE:		IDENTIFIER ( '.' IDENTIFIER )*;
-//IMPORTNAME:			NAMEINPACKAGE '.*'?;
-MEMBERNAME:			(IDENTIFIER|'*');
+IMPORTNAME:		NAMEINPACKAGE  ('.' '*')*;
+MEMBERNAME:		(IDENTIFIER|'*');
 
 // Lexical miscellany
 QSTRING:			'"' ( options {greedy=false;} : . )* '"' ;
