@@ -13,15 +13,14 @@ package annabot.antlr;
 }
 
 program:	import_stmt*
-			CLAIM CLASSNAME '{'
+			CLAIM IDENTIFIER '{'
 				stmt+
-			'}' {
-				System.out.println("Matched Program!"); 
-			}
+			'}'
 			;
 
-import_stmt:	IMPORT FULLPACKAGENAME ';' {
-			System.out.println("IMPORT " + $FULLPACKAGENAME.text);
+// XXX should use IMPORT IMPORTNAME
+import_stmt:	IMPORT NAMEINPACKAGE ';' {
+			System.out.println("IMPORT " + $NAMEINPACKAGE.text);
 			};
 
 // Statement, with or without if ... { stmt } around.
@@ -46,15 +45,13 @@ checks:	check
 
 check:	classAnnotated | methodAnnotated | fieldAnnotated;
 
-classAnnotated:		CLASS_ANNOTATED '(' FULLPACKAGENAME ')';
-methodAnnotated:	METHOD_ANNOTATED '(' FULLPACKAGENAME ')';
-fieldAnnotated:		FIELD_ANNOTATED '('
-					FULLPACKAGENAME ( ',' MEMBERNAME )? ')';
+classAnnotated:		CLASS_ANNOTATED '(' NAMEINPACKAGE ')';
+methodAnnotated:	METHOD_ANNOTATED '(' NAMEINPACKAGE ')';
+fieldAnnotated:		FIELD_ANNOTATED '(' NAMEINPACKAGE ( ',' MEMBERNAME )? ')';
 
 error:	ERROR QSTRING;
 
-// Lexical Tokens
-
+// Keywords
 IMPORT:				'import';
 CLAIM:				'claim';
 REQUIRE:			'require';
@@ -63,16 +60,23 @@ CLASS_ANNOTATED:	'class.annotated';
 METHOD_ANNOTATED:	'method.annotated';
 FIELD_ANNOTATED:	'field.annotated';
 IF:					'if';
-AND:				'&&';
-OR:					'||';
-NOT:				'!' | 'not';
+AND:				'&&' | 'and';
+OR:					'||' | 'or';
+NOT:				'!'  | 'not';
 ERROR:				'error';
-// FULLORSHORTCLASSNAME: FULLPACKAGENAME | CLASSNAME;
-FULLPACKAGENAME:	'a'..'z' ('a'..'z'|'A'..'Z'|'.'|'*')+ ;
-CLASSNAME:'A'..'Z' ('a'..'z'|'A'..'Z')+;
-MEMBERNAME:			('a'..'z'|'A'..'Z'|'*')+ ;
+
+// stuff for identiers etc.
+LETTER:				'a'..'z'|'A'..'Z';
+DIGIT:				'0'..'9';
+IDENTIFIERCHAR:		LETTER | DIGIT | '_';
+IDENTIFIER:			LETTER IDENTIFIERCHAR*;
+NAMEINPACKAGE:		IDENTIFIER ( '.' IDENTIFIER )*;
+//IMPORTNAME:			NAMEINPACKAGE '.*'?;
+MEMBERNAME:			(IDENTIFIER|'*');
+
+// Lexical miscellany
 QSTRING:			'"' ( options {greedy=false;} : . )* '"' ;
-fragment NEWLINE:	'\r'? '\n';	// allow for ms-dog files.
+fragment NEWLINE:	'\r'? '\n';	// allow for ms-dos files.
 WHITESPACE:	(' '|'\t'|NEWLINE)+ {skip();} ;
 COMMENT:	'#' ( options {greedy=false;} : . )* NEWLINE+ {
 				skip();
