@@ -15,7 +15,8 @@ AND several output folders:
 	Input			Output
 	-----			------
 	src,regress		build
-	claims			claimclasses
+	javaclaims		javaclaimclasses
+	dslclaims		-
 	systests		systestclasses
 	
 To set up for developing and testing AnnaBot as an Eclipse
@@ -57,6 +58,7 @@ ANT
 ---
 There is the outline of an Ant task but it
 does not work as of this writing.
+Anyway, there needs to be two tasks, AnnaBotC and AnnaBot.
 
 OTHER PROJECTS
 --------------
