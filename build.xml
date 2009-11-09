@@ -33,7 +33,7 @@
          	description="Run the Antlr-based AnnaBot compiler">
         <java className="annabot.antlr.AnnaBot">
         	<classpath refid="antlr.classpath"/>
-			<arg>/home/ian/paper/annabot/examples/jpa.claim</arg>
+			<arg>claims/EJBType.claim</arg>
 		</java>
     </target>
 	
@@ -55,11 +55,11 @@
 		</junit>
 	</target>
 
-    <target name="compile" depends="antlr"
+    <target name="compile" depends="antlr-by-java"
     	description="Compile everything">
     	<javac>
-			<classpath ref="antlr.classpath"/>
-		</javac>
+		<classpath refid="antlr.classpath"/>
+	</javac>
     </target>
 
 	<target name="antlr"
