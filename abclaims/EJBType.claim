@@ -1,0 +1,9 @@
+claim EJB {
+    atMostOne 
+	class.annotated(javax.ejb.Entity) ||
+	class.annotated(javax.ejb.Stateless) || 	
+	class.annotated(javax.ejb.Stateful) 
+        error "Class has conflicting top-level EJB annotations"
+    }
+}
+
