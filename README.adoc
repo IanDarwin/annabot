@@ -90,5 +90,33 @@ Examine the existing claims folder for some examples.
 Please contribute back to the project any claims that you 
 develop for public APIs - thank you!
 
+Testing the tester
+
+A testing tool must itself be tested, to provide a chain of trust.
+The individual elements, such as the tree package's And, AtMostOne,
+and friends, are all tested routinely using Junit [TestInfected].
+These can be independently verified by invoking any standard JUnit4
+test runner on the class tree.AllTests found in the regress folder.
+This is invoked automatically from the AnnaBotTests class found in
+the root of the regress folder; this also provides some tests for
+the basic functionality of the AnnaBot control program.
+
+In addition, there are integration tests showing that AnnaBot does
+detect the failure modes described by the Claim files for JPA; these
+are available in the systests folder of the project.
+
+Given these tests, I did not immediately see a need to do permutation
+testing on a body of existing code, since the Integration Tests
+provided with the package will provide an assurance that the package
+will find erroneous annotations it they exist. An anonymous reviewer
+convinced me that mutation testing is regarded as a standard approach.
+Manually introducing several errors into one of the sample codebases
+(the Toronto Centre for Phenogenomics, see Section 4) and re-running
+the program ensured that the errors were correctly detected.
+
+Tests of the ClassSource files (used to discover classes in Jar
+files and in directory hierarchies) are in the author's darwinsys-api
+project, available from the same CVS repository as AnnaBot itself.
+
 $Id$
 
