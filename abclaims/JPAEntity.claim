@@ -1,7 +1,7 @@
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-claim JPA {
+claim JPAEntity {
 if (class.annotated(javax.persistence.Entity)) {
     require method.annotated(javax.persistence.Id) || field.annotated(javax.persistence.Id);
     atMostOne method.annotated(javax.persistence.ANY) || field.annotated(javax.persistence.ANY)	
