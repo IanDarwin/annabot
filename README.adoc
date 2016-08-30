@@ -98,11 +98,13 @@ __Actual output__: fails to compile.
 
 Now you can dive in and start working on the code!
 
-Remember: git update periodically. Send git pull requests, or git diff -u (or Eclipse patch) diffs.
+See TODO file for what needs doing.
 
-== NetBeanS, IntelliJ, etc.
+Remember: `git update` periodically. Send git pull requests, or git diff -u (or Eclipse patch) diffs.
 
-If you want it, nobody will stop you.
+== NetBeans, IntelliJ, etc.
+
+If you want to make it work on these, nobody will stop you.
 Better if you can send these IDE's various befuddling config files,
 (as long as they don't embed any full paths or otherwise break use of Maven (and Eclipse)).
 

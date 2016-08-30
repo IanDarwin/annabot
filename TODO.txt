@@ -6,8 +6,6 @@ Many of these are expanded in the accompanying Paper.
 
 ---------Infrastructure-----------------------
 
-N.B. Update build.xml for multiple output folders!!
-
 Convert debug calls to JULI logging.
 
 --------- Main AnnaBot ------------------------
@@ -32,6 +30,6 @@ Visibility:
 	on a protected/default/private method rather than public
 	*Spring Ref V 2.0.2, Section 9.5.6*
 
-Make as a plug-in for Eclipse, NB?.
+Make it runnable as a plug-in for Eclipse, NB?.
 
-Make as a plug-in for FindBugs?
+Make it runnable as a plug-in for FindBugs?
