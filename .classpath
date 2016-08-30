@@ -3,11 +3,12 @@
 	<classpathentry kind="src" path="src/main/java"/>
 	<classpathentry kind="src" path="src/test/java"/>
 	<classpathentry kind="src" output="systestclasses" path="systests"/>
-	<classpathentry kind="src" path="abclaims" output="javaclaimclasses"/>
+	<classpathentry kind="src" output="javaclaimclasses" path="abclaims"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/javaee.jar"/>
 	<classpathentry kind="lib" path="lib/antlr-3.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/ant.jar"/>
+	<classpathentry kind="lib" path="lib/darwinsys.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="build"/>
 </classpath>
