@@ -8,10 +8,25 @@ For a quick demo, run:
 
 ----
 mvn package assembly:single
-java -jar target/annabot-1.0.0-SNAPSHOT-jar-with-dependencies.jar claimclasses systestclasses
+java -jar target/annabot-1.0.0-SNAPSHOT-jar-with-dependencies.jar abclaims target/classes
 ----
 
 If the mvn fails to start, with a message about antlr-3.1.1, run the Unix script `scripts/install_antlr_runtime` and try again.
+
+Expected output is something like the following (filenames have changed):
+
+----
+Using 7 claims from directory abclaims
+Checking nnn targets from directory systestclasses
+AnnaBot: Initialization took 0.1 seconds
+... chatter about non-relevant classes ...
+class violations.JPAEntityNoArgConstructor: JPA Entities must have a no-arg constructor
+class violations.JPAEntityMethodFieldAnnotated: JPA Entity must have an ID
+class violations.JPAEntityMethodFieldAnnotated: JPA Entities may have field OR method annotations, not both
+class violations.JPAEntityHasId: JPA Entity must have an ID
+class violations.JPAEntitySetMethodAnnotated: JPA Entities may have field OR method annotations, not both
+AnnaBot: found 5 error(s) in 4 classes, time 0.3 seconds
+----
 
 == Running on Eclipse (out of date!)
 
@@ -44,17 +59,8 @@ Run this; it should run > 50 tests and give a green bar.
 	Class: annabot.AnnaBot
 	Arguments -> Application Arguments: claimclasses systestclasses
 
-Run this; it should give output something like the following:
+Run this; it should give output something like the above example.
 
-Using 7 claims from directory claimclasses
-Checking 4 targets from directory systestclasses
-AnnaBot: Initialization took 0.1 seconds
-class violations.JPAEntityNoArgConstructor: JPA Entities must have a no-arg constructor
-class violations.JPAEntityMethodFieldAnnotated: JPA Entity must have an ID
-class violations.JPAEntityMethodFieldAnnotated: JPA Entities may have field OR method annotations, not both
-class violations.JPAEntityHasId: JPA Entity must have an ID
-class violations.JPAEntitySetMethodAnnotated: JPA Entities may have field OR method annotations, not both
-AnnaBot: found 5 error(s) in 4 classes, time 0.3 seconds
 
 Now you can dive in and start working on the code!
 
