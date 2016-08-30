@@ -2,14 +2,25 @@ AnnaBot - Annotation Assertion Based Object Testing
 
 Ian Darwin, http://www.darwinsys.com/
 
-For a quick demo, run
+== Maven + Quick Demo
 
-java -classpath build:lib/javaee.jar:lib/darwinsys.jar annabot.AnnaBot claimclasses systestclasses
+For a quick demo, run:
 
-RUNNING ON ECLIPSE
-------------------
+----
+mvn package assembly:single
+java -jar annabot-1.0.0-SNAPSHOT-jar-with-dependencies.jar claimclasses systestclasses
+----
 
-The CVS module "annabot" is the root of an Eclipse project.
+If the mvn fails to start, with a message about antlr-3.1.1, run the Unix script `scripts/install_antlr_runtime` and try again.
+
+== Running on Eclipse
+
+The git module "annabot" *was* the root of an Eclipse project.
+This has NOT been tested since the conversion to Maven; see 
+http://blog.wakatta.jp/blog/2012/01/14/antlr3-maven-plugin-eclipse-setup/
+for some pointers on setting up Antlr+Maven+Eclipse.
+The following documents the old structure, which no longer exists:
+
 The setup is a bit unusual: there are several source folders
 AND several output folders:
 	Input			Output
@@ -21,6 +32,7 @@ AND several output folders:
 	
 To set up for developing and testing AnnaBot as an Eclipse
 project, assuming you checked it out under Eclipse as a project:
+
 1) Create a new JUnit 4 Run Configuration:
 	Name: AnnaBot Unit Tests
 	Class: AnnaBotTests
@@ -46,38 +58,28 @@ AnnaBot: found 5 error(s) in 4 classes, time 0.3 seconds
 
 Now you can dive in and start working on the code!
 
-Remember: CVS update periodically. Send cvs diff -u (or Eclipse patch) diffs.
+Remember: git update periodically. Send git pull requests, or git diff -u (or Eclipse patch) diffs.
 
-NETBEANS
---------
+== NetBeanS, IntelliJ, etc.
+
 If you want it, nobody will stop you.
-Better if you can send a "nbproject" folder
-(as long as it doesn't embed any full paths!).
+Better if you can send these IDE's various befuddling config files,
+(as long as they don't embed any full paths or othewise break use of Maven (and Eclipse)).
 
-ANT
----
-There is the outline of an Ant task but it
-does not work as of this writing.
-Anyway, there needs to be two tasks, AnnaBotC and AnnaBot.
+== Writing New Claims
 
-OTHER PROJECTS
---------------
+This is how AnnaBot will grow to become useful, so please dive in!
 
-You should be able to:
-	jar up the "build" folder, add that jar to another project's classpath; 
-	jar up the "claimclasses" but don't add that jar to classpath
-	run AnnaBot with the claimclasses.jar and the target classes.
+Each _Claim_ class has these required methods:
 
-WRITING NEW CLAIMS
-------------------
-Each Claim class has three required methods:
-
+----
 	/* return the description of the problem this claim finds */
 	public abstract String getDescription();
 	
 	/** Return a list of Operators that are the "if" part of
 	 * a claim; if any of these operators fails, the class
-	 * will be bypassed and considered successful for this claim.
+	 * will be bypassed and considered successful (i.e., will not
+	 * generate any failures!) for this claim.
 	 */
 	public abstract Operator[] getClassFilter();
 
@@ -87,20 +89,20 @@ Each Claim class has three required methods:
 	 * Only called if the Operators in getClassFilter all pass.
 	 */
 	public abstract Operator[] getOperators();
+----
 
 Examine the existing claims folder for some examples.
 Please contribute back to the project any claims that you 
 develop for public APIs - thank you!
 
-Testing the tester
+== Testing the tester
 
-A testing tool must itself be tested, to provide a chain of trust.
-The individual elements, such as the tree package's And, AtMostOne,
-and friends, are all tested routinely using Junit [TestInfected].
-These can be independently verified by invoking any standard JUnit4
-test runner on the class tree.AllTests found in the regress folder.
-This is invoked automatically from the AnnaBotTests class found in
-the root of the regress folder; this also provides some tests for
+A testing tool must as a matter of course be tested itself, to provide a chain of trust.
+The individual elements, such as the tree package's ++And++, ++AtMostOne++,
+and friends, are all tested routinely using Junit.
+These will be verified by "mvn package" automatically invoking the standard JUnit4
+test runner on the class tests found in the src/test folder.
+This also provides some tests for
 the basic functionality of the AnnaBot control program.
 
 In addition, there are integration tests showing that AnnaBot does
@@ -118,7 +120,5 @@ the program ensured that the errors were correctly detected.
 
 Tests of the ClassSource files (used to discover classes in Jar
 files and in directory hierarchies) are in the author's darwinsys-api
-project, available from the same CVS repository as AnnaBot itself.
-
-$Id$
-
+project, available in a jar file from Maven Central 
+and in source code from the same github account as AnnaBot itself.
