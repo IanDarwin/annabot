@@ -15,10 +15,11 @@
 
 	<property name="antlr_jar" value="lib/antlr-3.1.1.jar"/>
 	<property name="src" value="src/main/java"/>
+	<property name="src_antlr" value="src/main/antlr3"/>
 	<property name="lib" value="lib"/>
 	<property name="build" value="build"/>
-	<property name="claims" value="claimclasses"/>
-	<property name="systestclasses" value="systestclasses"/>
+	<property name="claims" value="ebclaims"/>
+	<property name="systestclasses" value="systests"/>
 
 	<path id="antlr.classpath">
 	      <fileset dir="${lib}">
@@ -65,7 +66,7 @@
 	<target name="antlr"
     	description="Run Antlr to build the compiler pieces">
 		<antlr 
-			target="${src}/annabot/antlr/Grammar.g"
+			target="${src_antlr}/annabot/antlr/Grammar.g"
 			outputdirectory="${build}">
 			<classpath refid="antlr.classpath"/>
 		</antlr>
@@ -77,8 +78,8 @@
 			<classpath refid="antlr.classpath"/>
 			<arg value="-o"/>
 			<arg value="${user.dir}"/>
-			<arg value="${src}/annabot/antlr/Grammar.g"/>
-			<arg value="${src}/annabot/antlr/TreeWalker.g"/>
+			<arg value="${src_antlr}/annabot/antlr/Grammar.g"/>
+			<arg value="${src_antlr}/annabot/antlr/TreeWalker.g"/>
 		</java>
 	</target>
 <!--
