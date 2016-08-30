@@ -44,26 +44,32 @@ The following documents the old structure, which no longer exists:
 
 The setup is a bit unusual: there are several source folders
 AND several output folders:
+----
 	Input			Output
 	-----			------
 	src,regress		build
 	javaclaims		javaclaimclasses
 	dslclaims		-
 	systests		systestclasses
+----
 	
 To set up for developing and testing AnnaBot as an Eclipse
 project, assuming you checked it out under Eclipse as a project:
 
 1) Create a new JUnit 4 Run Configuration:
+----
 	Name: AnnaBot Unit Tests
 	Class: AnnaBotTests
+----
 
 Run this; it should run > 50 tests and give a green bar.
 
 2) Create a Java Application Configuration
+----
 	Name: AnnaBot System Tests
 	Class: annabot.AnnaBot
 	Arguments -> Application Arguments: claimclasses systestclasses
+----
 
 Run this; it should give output something like the above example.
 
@@ -76,7 +82,7 @@ Remember: git update periodically. Send git pull requests, or git diff -u (or Ec
 
 If you want it, nobody will stop you.
 Better if you can send these IDE's various befuddling config files,
-(as long as they don't embed any full paths or othewise break use of Maven (and Eclipse)).
+(as long as they don't embed any full paths or otherwise break use of Maven (and Eclipse)).
 
 == Writing New Claims
 
