@@ -1,6 +1,6 @@
-AnnaBot - Annotation Assertion Based Object Testing
+= AnnaBot - Annotation Assertion Based Object Testing
 
-Ian Darwin, http://www.darwinsys.com/
+Ian Darwin, https://www.darwinsys.com/annabot/ or https://annabot.org/
 
 == Maven + Quick Demo
 
@@ -8,12 +8,12 @@ For a quick demo, run:
 
 ----
 mvn package assembly:single
-java -jar annabot-1.0.0-SNAPSHOT-jar-with-dependencies.jar claimclasses systestclasses
+java -jar target/annabot-1.0.0-SNAPSHOT-jar-with-dependencies.jar claimclasses systestclasses
 ----
 
 If the mvn fails to start, with a message about antlr-3.1.1, run the Unix script `scripts/install_antlr_runtime` and try again.
 
-== Running on Eclipse
+== Running on Eclipse (out of date!)
 
 The git module "annabot" *was* the root of an Eclipse project.
 This has NOT been tested since the conversion to Maven; see 
