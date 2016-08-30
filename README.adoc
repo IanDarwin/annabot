@@ -2,11 +2,11 @@
 
 Ian Darwin, https://www.darwinsys.com/annabot/ or https://annabot.org/
 
-== Caveat!
+== Status - Caveat!
 
 I worked on this quite a few years ago, and have just started getting back into it.
 It's been converted to Maven, and lightly modernized.
-There is no guarantee that it actually works at present. Watch for future commits...
+Nothing actually works as of this commit, but it's all moving in the right direction...
 
 == Maven + Quick Demo
 
@@ -23,7 +23,7 @@ Expected output is something like the following (filenames have changed):
 
 ----
 Using 7 claims from directory abclaims
-Checking nnn targets from directory systestclasses
+Checking nnn targets from directory systests
 AnnaBot: Initialization took 0.1 seconds
 ... chatter about non-relevant classes ...
 class violations.JPAEntityNoArgConstructor: JPA Entities must have a no-arg constructor
@@ -33,6 +33,23 @@ class violations.JPAEntityHasId: JPA Entity must have an ID
 class violations.JPAEntitySetMethodAnnotated: JPA Entities may have field OR method annotations, not both
 AnnaBot: found 5 error(s) in 4 classes, time 0.3 seconds
 ----
+
+_Actual output_ is that it doesn't recognize the claims files; presumably they need to be run through the compiler.
+
+== Ant + Quick Demo
+
+For a quick demo, run the Unix script `scripts/bootstrap_ant`, then do
+
+----
+ant
+----
+
+Expected output is similar to the Maven example above.
+
+_Actual output_ is that Antlr fails as it is looking in the wrong directory.
+
+*Bug* the Antlr step creates a bunch of temporary files in `src/main/antlr3/annabot/antlr/` that should be in a `generated-classes`
+directory, or be git-ignored.
 
 == Running on Eclipse (out of date!)
 
@@ -71,8 +88,13 @@ Run this; it should run > 50 tests and give a green bar.
 	Arguments -> Application Arguments: claimclasses systestclasses
 ----
 
-Run this; it should give output something like the above example.
+Run this. 
 
+Expected output: it should give output something like the Maven example above.
+
+__Actual output__: fails to compile.
+
+== Next Steps
 
 Now you can dive in and start working on the code!
 
