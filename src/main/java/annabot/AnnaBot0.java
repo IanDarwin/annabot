@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import demo.MyAnnotation;
 
 /*
- * Annotations Assertion Based Object Testing for Java
+ * ANNotations Assertion Based Object Testing for Java
  * Version 0.0 testbase - a few hard-coded claims.
  * Process each class, looking for conflicting uses
  * of JPA annotations: because, if you annotated both fields 
