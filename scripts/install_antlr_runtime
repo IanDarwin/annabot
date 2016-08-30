@@ -1,0 +1,2 @@
+mvn install:install-file -Dfile=lib/antlr-3.1.1.jar -DgroupId=org.antlr \
+    -DartifactId=antlr-master -Dversion=3.1.1 -Dpackaging=jar
