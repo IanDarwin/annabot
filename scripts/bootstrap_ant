@@ -1,0 +1,1 @@
+javac -cp lib/ant.jar -d build src/main/java/annabot/ant/AnnaBotTask.java 

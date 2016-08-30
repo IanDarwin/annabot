@@ -38,7 +38,7 @@
 		</java>
     </target>
 	
-    <taskdef name="annabot" classname="annabot.ant.AnnaBotTask2"
+    <taskdef name="annabot" classname="annabot.ant.AnnaBotTask"
     	classpath="${build}:${claims}:${lib}/darwinsys.jar"/>
 	   		
     <target name="systests" description="System tests">
