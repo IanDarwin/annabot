@@ -2,6 +2,12 @@
 
 Ian Darwin, https://www.darwinsys.com/annabot/ or https://annabot.org/
 
+== Caveat!
+
+I worked on this quite a few years ago, and have just started getting back into it.
+It's been converted to Maven, and lightly modernized.
+There is no guarantee that it actually works at present. Watch for future commits...
+
 == Maven + Quick Demo
 
 For a quick demo, run:
