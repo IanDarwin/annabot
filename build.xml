@@ -41,7 +41,7 @@
     <taskdef name="annabot" classname="annabot.ant.AnnaBotTask"
     	classpath="${build}:${claims}:${lib}/darwinsys.jar"/>
 	   		
-    <target name="systests" description="System tests">
+    <target name="systests" description="System tests" depends="runcompiler">
     	<annabot
     		claims="${claims}"
     		targets="${systestclasses}">
