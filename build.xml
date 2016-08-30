@@ -9,12 +9,12 @@
  ====================================================================== 
  -->
 <project 
-	name="AnnaBot - Annotation Assertions-Based Object Testing"
+	name="AnnaBot - ANNotation Assertions-Based Object Testing"
 	default="systests"
 	basedir=".">
 
 	<property name="antlr_jar" value="lib/antlr-3.1.1.jar"/>
-	<property name="src" value="src"/>
+	<property name="src" value="src/main/java"/>
 	<property name="lib" value="lib"/>
 	<property name="build" value="build"/>
 	<property name="claims" value="claimclasses"/>
