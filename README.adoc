@@ -1,127 +1,83 @@
-= AnnaBot - Annotation Assertion Based Object Testing
+AnnaBot - Annotation Assertion Based Object Testing
 
-Ian Darwin, https://www.darwinsys.com/annabot/ or https://annabot.org/
+Ian Darwin, http://www.darwinsys.com/
 
-== Status - Caveat!
+For a quick demo, run
 
-I worked on this quite a few years ago, and have just started getting back into it.
-It's been converted to Maven, and lightly modernized.
-Nothing actually works as of this commit, but it's all moving in the right direction...
+java -classpath build:lib/javaee.jar:lib/darwinsys.jar annabot.AnnaBot claimclasses systestclasses
 
-== Maven + Quick Demo
+RUNNING ON ECLIPSE
+------------------
 
-For a quick demo, run:
-
-----
-mvn package assembly:single
-java -jar target/annabot-1.0.0-SNAPSHOT-jar-with-dependencies.jar abclaims target/classes
-----
-
-If the mvn fails to start, with a message about antlr-3.1.1, run the Unix script `scripts/install_antlr_runtime` and try again.
-
-Expected output is something like the following (filenames have changed):
-
-----
-Using 7 claims from directory abclaims
-Checking nnn targets from directory systests
-AnnaBot: Initialization took 0.1 seconds
-... chatter about non-relevant classes ...
-class violations.JPAEntityNoArgConstructor: JPA Entities must have a no-arg constructor
-class violations.JPAEntityMethodFieldAnnotated: JPA Entity must have an ID
-class violations.JPAEntityMethodFieldAnnotated: JPA Entities may have field OR method annotations, not both
-class violations.JPAEntityHasId: JPA Entity must have an ID
-class violations.JPAEntitySetMethodAnnotated: JPA Entities may have field OR method annotations, not both
-AnnaBot: found 5 error(s) in 4 classes, time 0.3 seconds
-----
-
-_Actual output_ is that it doesn't recognize the claims files; presumably they need to be run through the compiler.
-
-== Ant + Quick Demo
-
-For a quick demo, run the Unix script `scripts/bootstrap_ant`, then do
-
-----
-ant
-----
-
-Expected output is similar to the Maven example above.
-
-_Actual output_ is that Antlr fails as it is looking in the wrong directory.
-
-*Bug* the Antlr step creates a bunch of temporary files in `src/main/antlr3/annabot/antlr/` that should be in a `generated-classes`
-directory, or be git-ignored.
-
-== Running on Eclipse (out of date!)
-
-The git module "annabot" *was* the root of an Eclipse project.
-This has NOT been tested since the conversion to Maven; see 
-http://blog.wakatta.jp/blog/2012/01/14/antlr3-maven-plugin-eclipse-setup/
-for some pointers on setting up Antlr+Maven+Eclipse.
-The following documents the old structure, which no longer exists:
-
+The CVS module "annabot" is the root of an Eclipse project.
 The setup is a bit unusual: there are several source folders
 AND several output folders:
-----
 	Input			Output
 	-----			------
 	src,regress		build
 	javaclaims		javaclaimclasses
 	dslclaims		-
 	systests		systestclasses
-----
 	
 To set up for developing and testing AnnaBot as an Eclipse
 project, assuming you checked it out under Eclipse as a project:
-
 1) Create a new JUnit 4 Run Configuration:
-----
 	Name: AnnaBot Unit Tests
 	Class: AnnaBotTests
-----
 
 Run this; it should run > 50 tests and give a green bar.
 
 2) Create a Java Application Configuration
-----
 	Name: AnnaBot System Tests
 	Class: annabot.AnnaBot
 	Arguments -> Application Arguments: claimclasses systestclasses
-----
 
-Run this. 
+Run this; it should give output something like the following:
 
-Expected output: it should give output something like the Maven example above.
-
-__Actual output__: fails to compile.
-
-== Next Steps
+Using 7 claims from directory claimclasses
+Checking 4 targets from directory systestclasses
+AnnaBot: Initialization took 0.1 seconds
+class violations.JPAEntityNoArgConstructor: JPA Entities must have a no-arg constructor
+class violations.JPAEntityMethodFieldAnnotated: JPA Entity must have an ID
+class violations.JPAEntityMethodFieldAnnotated: JPA Entities may have field OR method annotations, not both
+class violations.JPAEntityHasId: JPA Entity must have an ID
+class violations.JPAEntitySetMethodAnnotated: JPA Entities may have field OR method annotations, not both
+AnnaBot: found 5 error(s) in 4 classes, time 0.3 seconds
 
 Now you can dive in and start working on the code!
 
-See TODO file for what needs doing.
+Remember: CVS update periodically. Send cvs diff -u (or Eclipse patch) diffs.
 
-Remember: `git update` periodically. Send git pull requests, or git diff -u (or Eclipse patch) diffs.
+NETBEANS
+--------
+If you want it, nobody will stop you.
+Better if you can send a "nbproject" folder
+(as long as it doesn't embed any full paths!).
 
-== NetBeans, IntelliJ, etc.
+ANT
+---
+There is the outline of an Ant task but it
+does not work as of this writing.
+Anyway, there needs to be two tasks, AnnaBotC and AnnaBot.
 
-If you want to make it work on these, nobody will stop you.
-Better if you can send these IDE's various befuddling config files,
-(as long as they don't embed any full paths or otherwise break use of Maven (and Eclipse)).
+OTHER PROJECTS
+--------------
 
-== Writing New Claims
+You should be able to:
+	jar up the "build" folder, add that jar to another project's classpath; 
+	jar up the "claimclasses" but don't add that jar to classpath
+	run AnnaBot with the claimclasses.jar and the target classes.
 
-This is how AnnaBot will grow to become useful, so please dive in!
+WRITING NEW CLAIMS
+------------------
+Each Claim class has three required methods:
 
-Each _Claim_ class has these required methods:
-
-----
 	/* return the description of the problem this claim finds */
 	public abstract String getDescription();
 	
 	/** Return a list of Operators that are the "if" part of
 	 * a claim; if any of these operators fails, the class
-	 * will be bypassed and considered successful (i.e., will not
-	 * generate any failures!) for this claim.
+	 * will be bypassed and considered successful for this claim.
 	 */
 	public abstract Operator[] getClassFilter();
 
@@ -131,20 +87,20 @@ Each _Claim_ class has these required methods:
 	 * Only called if the Operators in getClassFilter all pass.
 	 */
 	public abstract Operator[] getOperators();
-----
 
 Examine the existing claims folder for some examples.
 Please contribute back to the project any claims that you 
 develop for public APIs - thank you!
 
-== Testing the tester
+Testing the tester
 
-A testing tool must as a matter of course be tested itself, to provide a chain of trust.
-The individual elements, such as the tree package's ++And++, ++AtMostOne++,
-and friends, are all tested routinely using Junit.
-These will be verified by "mvn package" automatically invoking the standard JUnit4
-test runner on the class tests found in the src/test folder.
-This also provides some tests for
+A testing tool must itself be tested, to provide a chain of trust.
+The individual elements, such as the tree package's And, AtMostOne,
+and friends, are all tested routinely using Junit [TestInfected].
+These can be independently verified by invoking any standard JUnit4
+test runner on the class tree.AllTests found in the regress folder.
+This is invoked automatically from the AnnaBotTests class found in
+the root of the regress folder; this also provides some tests for
 the basic functionality of the AnnaBot control program.
 
 In addition, there are integration tests showing that AnnaBot does
@@ -162,5 +118,7 @@ the program ensured that the errors were correctly detected.
 
 Tests of the ClassSource files (used to discover classes in Jar
 files and in directory hierarchies) are in the author's darwinsys-api
-project, available in a jar file from Maven Central 
-and in source code from the same github account as AnnaBot itself.
+project, available from the same CVS repository as AnnaBot itself.
+
+$Id$
+
