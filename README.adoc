@@ -1,4 +1,4 @@
-AnnaBot - Annotation Assertion Based Object Testing
+= AnnaBot - Annotation Assertion Based Object Testing
 
 Ian Darwin, http://www.darwinsys.com/
 
@@ -6,28 +6,31 @@ For a quick demo, run
 
 java -classpath build:lib/javaee.jar:lib/darwinsys.jar annabot.AnnaBot claimclasses systestclasses
 
-RUNNING ON ECLIPSE
-------------------
+== RUNNING ON ECLIPSE
 
-The CVS module "annabot" is the root of an Eclipse project.
+The git module "annabot" is the root of an Eclipse project.
 The setup is a bit unusual: there are several source folders
 AND several output folders:
+
 	Input			Output
 	-----			------
 	src,regress		build
 	javaclaims		javaclaimclasses
 	dslclaims		-
 	systests		systestclasses
-	
+
 To set up for developing and testing AnnaBot as an Eclipse
 project, assuming you checked it out under Eclipse as a project:
+
 1) Create a new JUnit 4 Run Configuration:
+
 	Name: AnnaBot Unit Tests
 	Class: AnnaBotTests
 
 Run this; it should run > 50 tests and give a green bar.
 
 2) Create a Java Application Configuration
+
 	Name: AnnaBot System Tests
 	Class: annabot.AnnaBot
 	Arguments -> Application Arguments: claimclasses systestclasses
@@ -46,30 +49,30 @@ AnnaBot: found 5 error(s) in 4 classes, time 0.3 seconds
 
 Now you can dive in and start working on the code!
 
-Remember: CVS update periodically. Send cvs diff -u (or Eclipse patch) diffs.
+Remember: git update periodically. Send git diff -u (or Eclipse patch) diffs.
 
-NETBEANS
---------
+== NETBEANS
+
 If you want it, nobody will stop you.
 Better if you can send a "nbproject" folder
 (as long as it doesn't embed any full paths!).
 
-ANT
----
+== ANT
+
 There is the outline of an Ant task but it
 does not work as of this writing.
 Anyway, there needs to be two tasks, AnnaBotC and AnnaBot.
 
-OTHER PROJECTS
---------------
+== OTHER PROJECTS
 
 You should be able to:
+
 	jar up the "build" folder, add that jar to another project's classpath; 
 	jar up the "claimclasses" but don't add that jar to classpath
 	run AnnaBot with the claimclasses.jar and the target classes.
 
-WRITING NEW CLAIMS
-------------------
+== WRITING NEW CLAIMS
+
 Each Claim class has three required methods:
 
 	/* return the description of the problem this claim finds */
@@ -92,7 +95,7 @@ Examine the existing claims folder for some examples.
 Please contribute back to the project any claims that you 
 develop for public APIs - thank you!
 
-Testing the tester
+== Testing the tester
 
 A testing tool must itself be tested, to provide a chain of trust.
 The individual elements, such as the tree package's And, AtMostOne,
@@ -118,7 +121,10 @@ the program ensured that the errors were correctly detected.
 
 Tests of the ClassSource files (used to discover classes in Jar
 files and in directory hierarchies) are in the author's darwinsys-api
-project, available from the same CVS repository as AnnaBot itself.
+project, available from the same git repository as AnnaBot itself.
 
-$Id$
+== Antlr Grammar
 
+There is an experimental Antlr grammar, but it has not been worked on
+in several years and, truth to tell, I have no idea what state it's in.
+Just committed here in case somebody wants to run with it.
