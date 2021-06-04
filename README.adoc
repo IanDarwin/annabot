@@ -5,10 +5,12 @@ Ian Darwin, http://www.darwinsys.com/
 This project now supports maven building. The Eclipse build and other IDEs are
 unsupported.
 
-For a quick demo, run
+For a quick demo, you should be able to run
 
 	mvn clean package assembly:single
-	java -jar annabot-1.0.0-SNAPSHOT-jar-with-dependencies.jar claimclasses systestclasses
+	java -jar target/annabot-1.0.0-SNAPSHOT-jar-with-dependencies.jar claimclasses systestclasses
+
+Does NOT work at present; I need to move some files around and then update the demo command.
 
 == RUNNING ON ECLIPSE (old info, may not work).
 
