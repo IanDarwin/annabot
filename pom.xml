@@ -29,9 +29,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<javase.version>1.8</javase.version>
-		<javaee.version>7.0</javaee.version>
-		<darwinsys-api.version>1.2.0-SNAPSHOT</darwinsys-api.version>
+		<javase.version>11</javase.version>
+		<javaee.version>8.0</javaee.version>
+		<darwinsys-api.version>1.5.14</darwinsys-api.version>
 		<darwinsys-ee.version>0.2.0-SNAPSHOT</darwinsys-ee.version>
 		<maven.compiler.source>${javase.version}</maven.compiler.source>
 		<maven.compiler.target>${javase.version}</maven.compiler.target>
