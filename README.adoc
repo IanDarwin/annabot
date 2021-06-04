@@ -2,11 +2,15 @@
 
 Ian Darwin, http://www.darwinsys.com/
 
+This project now supports maven building. The Eclipse build and other IDEs are
+unsupported.
+
 For a quick demo, run
 
-java -classpath build:lib/javaee.jar:lib/darwinsys.jar annabot.AnnaBot claimclasses systestclasses
+	mvn clean package assembly:single
+	java -jar annabot-1.0.0-SNAPSHOT-jar-with-dependencies.jar claimclasses systestclasses
 
-== RUNNING ON ECLIPSE
+== RUNNING ON ECLIPSE (old info, may not work).
 
 The git module "annabot" is the root of an Eclipse project.
 The setup is a bit unusual: there are several source folders
@@ -51,25 +55,11 @@ Now you can dive in and start working on the code!
 
 Remember: git update periodically. Send git diff -u (or Eclipse patch) diffs.
 
-== NETBEANS
+== OTHER IDEs
 
 If you want it, nobody will stop you.
-Better if you can send a "nbproject" folder
-(as long as it doesn't embed any full paths!).
-
-== ANT
-
-There is the outline of an Ant task but it
-does not work as of this writing.
-Anyway, there needs to be two tasks, AnnaBotC and AnnaBot.
-
-== OTHER PROJECTS
-
-You should be able to:
-
-	jar up the "build" folder, add that jar to another project's classpath; 
-	jar up the "claimclasses" but don't add that jar to classpath
-	run AnnaBot with the claimclasses.jar and the target classes.
+If you get it working, please feel free to fork the project and send a pull request
+to include your IDE's configuration files.
 
 == WRITING NEW CLAIMS
 
@@ -102,9 +92,9 @@ The individual elements, such as the tree package's And, AtMostOne,
 and friends, are all tested routinely using Junit [TestInfected].
 These can be independently verified by invoking any standard JUnit4
 test runner on the class tree.AllTests found in the regress folder.
-This is invoked automatically from the AnnaBotTests class found in
-the root of the regress folder; this also provides some tests for
-the basic functionality of the AnnaBot control program.
+These are invoked automatically when you build with Maven.
+This also includes some tests for the basic functionality of the
+AnnaBot control program.
 
 In addition, there are integration tests showing that AnnaBot does
 detect the failure modes described by the Claim files for JPA; these
@@ -122,9 +112,3 @@ the program ensured that the errors were correctly detected.
 Tests of the ClassSource files (used to discover classes in Jar
 files and in directory hierarchies) are in the author's darwinsys-api
 project, available from the same git repository as AnnaBot itself.
-
-== Antlr Grammar
-
-There is an experimental Antlr grammar, but it has not been worked on
-in several years and, truth to tell, I have no idea what state it's in.
-Just committed here in case somebody wants to run with it.
