@@ -64,8 +64,8 @@
 		<!-- Antlr runtime -->
 		<dependency>
 			<groupId>org.antlr</groupId>
-			<artifactId>antlr-master</artifactId>
-			<version>3.1.1</version>
+			<artifactId>antlr-complete</artifactId>
+			<version>3.5.2</version>
 		</dependency>
 	</dependencies>
 	<build>
