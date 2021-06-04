@@ -1,3 +1,0 @@
-This file is no longer maintained.
-See the file src/annabot/antlr/Grammar.g 
-for the actual EBNF.
