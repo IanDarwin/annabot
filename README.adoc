@@ -12,9 +12,25 @@ For a quick demo, you should be able to run
 
 Does NOT work at present; I need to move some files around and then update the demo command.
 
+Remember: git update periodically. Send a pull request (or, if you must, a git diff -u or Eclipse patch).
+
+== The Main Programs
+
+There are three main programs in the annabot package:
+
+* AnnaBot - the real main; use this!
+* AnnaBot0 - a test-like program
+* AnnaBotC - the Antlr-based compiler for .claim files; *unfinished*
+
+== Running with Maven
+
+You can do `mvn clean package assembly:single` to compile, run tests, and make
+two Jar files, one with just our code, the other with all deps.
+Both appear in the _target_ folder.
+
 == RUNNING ON ECLIPSE (old info, may not work).
 
-The git module "annabot" is the root of an Eclipse project.
+The git project _annabot_ is the root of an Eclipse project.
 The setup is a bit unusual: there are several source folders
 AND several output folders:
 
@@ -54,8 +70,6 @@ class violations.JPAEntitySetMethodAnnotated: JPA Entities may have field OR met
 AnnaBot: found 5 error(s) in 4 classes, time 0.3 seconds
 
 Now you can dive in and start working on the code!
-
-Remember: git update periodically. Send git diff -u (or Eclipse patch) diffs.
 
 == OTHER IDEs
 

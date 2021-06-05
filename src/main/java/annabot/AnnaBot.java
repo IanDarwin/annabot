@@ -14,6 +14,12 @@ import com.darwinsys.lang.GetOpt;
 import com.darwinsys.lang.GetOptDesc;
 import com.darwinsys.util.Debug;
 
+/*
+ * Annotations Assertion Based Object Testing for Java
+ * A version in which the user provides a pre-compiled
+ * parse list and a package name. The DSL is effectively
+ * a set of Constructor calls.
+ */
 public class AnnaBot {
 
 	protected static void usage(int i) {
@@ -24,10 +30,6 @@ public class AnnaBot {
 	}	
 	
 	/**
-	 * Annotations Assertion Based Object Testing for Java
-	 * A version in which the user provides a pre-compiled
-	 * parse list and a package name. The DSL is effectively
-	 * a set of Constructor calls.
 	 * @param args -c or -j to provide classpath used by the target classes
 	 * @param args claims (classname, directory or jar)
 	 * @param args target classes to test (classname, directory or jar).
